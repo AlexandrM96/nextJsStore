@@ -1,0 +1,74 @@
+.content__container {
+    margin-left: 100px;
+    width: 1000px;
+}
+
+.content__containerLoading__false {
+    display: none;
+}
+
+.content__containerLoading {
+    width: 100px;
+    margin: auto;
+    position: absolute;
+    top: 40%;
+    left: 0;
+    bottom: 50%;
+    right: 0;
+    z-index: 999999999;
+}
+
+.load__img {
+    animation-name: rotation;
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+@keyframes rotation {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.content__pages {
+    width: 100%;
+    display: flex;
+    margin: 0 auto;
+}
+
+.content__pagesButton {
+    color: white;
+    background: grey;
+    cursor: pointer;
+    border: 0;
+    padding: 5px 5px;
+    border-radius: 100px;
+}
+
+.content__pagesCount {
+    border: 1px solid lightgray;
+    background: gray;
+    color: white;
+    border-radius: 100%;
+    padding: 0px 6px;
+    margin: 0 3px;
+    cursor: pointer;
+}
+
+.content__pagesCount__true {
+    border: 1px solid rgb(45, 45, 45);
+    background: rgb(106, 105, 105);
+    color: white;
+    border-radius: 100%;
+    padding: 0px 6px;
+    margin: 0 3px;
+    cursor: pointer;
+}
+
+.content__pagesCount:hover {
+    background: rgb(101, 101, 101);
+}

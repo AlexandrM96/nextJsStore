@@ -1,0 +1,7 @@
+.main__container {
+  width: 1600px;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  background: lightblue;
+}

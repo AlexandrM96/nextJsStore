@@ -1,0 +1,17 @@
+.asideItem__element {
+  position: relative;
+}
+
+.asideItem__elementList {
+  position: absolute;
+  z-index: 999;
+  border: 1px solid black;
+  background: lavenderblush;
+  padding: 0px;
+  text-align: center;
+  /* margin-bottom: 15px; */
+  border-radius: 5px;
+  list-style-type: none;
+  left: 100%;
+  top: 0%;
+}

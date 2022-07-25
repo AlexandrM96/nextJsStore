@@ -1,0 +1,17 @@
+.aside__container {
+  width: 331px;
+}
+
+.ulList__element {
+  border: 1px solid black;
+  background: lavenderblush;
+  margin-bottom: 15px;
+  padding: 10px 5px;
+  border-radius: 5px;
+  list-style-type: none;
+  cursor: pointer;
+}
+
+.ulList__element:hover {
+  background: rgb(208, 196, 200);
+}
