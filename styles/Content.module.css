@@ -49,6 +49,10 @@
     border-radius: 100px;
 }
 
+.content__pagesButton__none {
+    display: none;
+}
+
 .content__pagesCount {
     border: 1px solid lightgray;
     background: gray;

@@ -1,7 +1,7 @@
 
-import { apiRequestCategoriesAddItems } from '../../ApiRequestion/API';
+import { apiRequestCategoriesAddItems } from '../../../ApiRequestion/API';
 import { useDispatch } from 'react-redux';
-import { addIdCategory, changingFlag } from '../../redux/action';
+import { addIdCategory, changingFlag } from '../../../redux/action';
 import styles from '../../../styles/ArrayCategoriesItem.module.css';
 
 export default function ArrayCategoriesItem(props) {
