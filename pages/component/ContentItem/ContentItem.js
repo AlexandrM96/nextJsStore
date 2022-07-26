@@ -1,19 +1,15 @@
 
+import { apiRequestCategoriesAddItems } from '../../../ApiRequestion/API';
+import AsideItem from '../AsideItem/AsideItem';
 import styles from '../../../styles/Content.module.css';
-import Image from 'next/image';
+
 export default function ContentItem(props) {
 
   return (
     <div className={styles.contentItem}>
       <div className={styles.contentItem__container}>
         <div className={styles.contentItem__containerInfo}>
-          {/*<img src='https://aristokratrest.com/files/aristokratrest/image/no_product.jpg' alt='play' />*/}
-          {/*<Image*/}
-          {/*    src="https://aristokratrest.com/files/aristokratrest/image/no_product.jpg"*/}
-          {/*    alt="Landscape picture"*/}
-          {/*    width={500}*/}
-          {/*    height={500}*/}
-          {/*/>*/}
+          <img src='https://aristokratrest.com/files/aristokratrest/image/no_product.jpg' alt='play' />
           <p>{props.item.name}</p>
         </div>
         <div className={styles.contentItem__containerPriseAndCart}>

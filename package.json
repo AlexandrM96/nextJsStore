@@ -1,5 +1,5 @@
 {
-  "name": "react-clone",
+  "name": "new-store",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -11,19 +11,16 @@
   "dependencies": {
     "next": "^12.2.3",
     "next-redux-wrapper": "^7.0.5",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
     "react-redux": "^8.0.2",
     "redux": "^4.2.0",
-    "redux-thunk": "^2.4.1"
+    "redux-devtools-extension": "^2.13.9",
+    "redux-thunk": "^2.4.1",
+    "redux-wrapper": "^0.0.1"
   },
   "devDependencies": {
-    "@swc/core": "^1.2.218",
-    "@zeit/next-css": "^1.0.1",
     "eslint": "8.20.0",
-    "eslint-config-next": "12.2.3",
-    "redux-devtools-extension": "^2.13.9",
-    "swc-loader": "^0.2.3",
-    "webpack": "^5.74.0"
+    "eslint-config-next": "12.2.3"
   }
 }

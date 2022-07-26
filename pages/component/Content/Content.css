@@ -3,11 +3,11 @@
     width: 1000px;
 }
 
-.content__containerLoading__false {
+.content__container-loading__false {
     display: none;
 }
 
-.content__containerLoading {
+.content__container-loading {
     width: 100px;
     margin: auto;
     position: absolute;
@@ -40,7 +40,7 @@
     margin: 0 auto;
 }
 
-.content__pagesButton {
+.content__pages-button {
     color: white;
     background: grey;
     cursor: pointer;
@@ -49,7 +49,7 @@
     border-radius: 100px;
 }
 
-.content__pagesCount {
+.content__pages-count {
     border: 1px solid lightgray;
     background: gray;
     color: white;
@@ -59,7 +59,7 @@
     cursor: pointer;
 }
 
-.content__pagesCount__true {
+.content__pages-count__true {
     border: 1px solid rgb(45, 45, 45);
     background: rgb(106, 105, 105);
     color: white;
@@ -69,6 +69,6 @@
     cursor: pointer;
 }
 
-.content__pagesCount:hover {
+.content__pages-count:hover {
     background: rgb(101, 101, 101);
 }

@@ -16,7 +16,8 @@ function reducer(state = initialState, action) {
             const loadOne = action.payload.flagLoad;
             state.flagLoad = loadOne;
             const newArrayGeneralCategories = [...state.arrayGeneralCategories];
-            return { ...state, arrayGeneralCategories: newArrayGeneralCategories }
+            console.log(state.arrayGeneralCategories)
+            return { ...state, arrayGeneralCategories: newArrayGeneralCategories[0] }
         case 'API_REQUEST_CATEGORIES':
             if (state.arrayCategories !== []) {
                 state.arrayCategories = []
@@ -31,7 +32,7 @@ function reducer(state = initialState, action) {
             if (state.arrayCategoryId !== [] || state.maxPagesPagination !== []) {
                 state.arrayCategoryId = []
                 state.maxPagesPagination = []
-            }
+            };
             const arrayCategoryId = action.payload.result.products;
             const arrayPagination = action.payload.result.pagination.max_pages;
             let countPagination = 0;
@@ -44,7 +45,6 @@ function reducer(state = initialState, action) {
             state.flagLoad = loadThree;
             const newMaxPagesPagination = [...state.maxPagesPagination];
             const newArrayCategoryId = [...state.arrayCategoryId];
-            console.log(newMaxPagesPagination, newArrayCategoryId);
             return { ...state, arrayCategoryId: newArrayCategoryId, maxPagesPagination: newMaxPagesPagination }
 
         case 'ADD_ID_CATEGORY':
@@ -60,7 +60,7 @@ function reducer(state = initialState, action) {
             return { ...state }
         case 'CHANGING_PAGINATION':
             const pagNum = action.payload.num;
-            console.log(pagNum);
+            // console.log(pagNum)
             // state.pagNum = pagNum;
             return { ...state, pagNum: pagNum }
         default:
