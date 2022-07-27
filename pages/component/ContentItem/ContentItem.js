@@ -1,7 +1,7 @@
 
 import { apiRequestCategoriesAddItems } from '../../../ApiRequestion/API';
 import AsideItem from '../AsideItem/AsideItem';
-import styles from '../../../styles/Content.module.css';
+import styles from '../../../styles/ContentItem.module.css';
 
 export default function ContentItem(props) {
 

@@ -1,6 +1,7 @@
 import store from "../redux/store";
 // import { useDispatch } from 'react-redux';
 // import { ApiRequestGeneralCategoriesRedux } from '../redux/action';
+import {fetchposts, fetchpostsTwo, fetchpostsThree,fetchpostsFour} from '../store/actions/postActions';
 import { changingFlag, changingPagination } from '../redux/action';
 import { useSelector, useDispatch } from 'react-redux';
 
@@ -64,6 +65,7 @@ export async function apiRequestCategoriesAddItems(id, page) {
     .then((response) => response.json())
     .then((data) => {
       console.log(data.data)
+            fetchpostsThree()
       store.dispatch({
         type: 'API_REQUEST_CATEGORY_ADD_ITEMS',
         payload: {

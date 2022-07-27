@@ -1,21 +1,29 @@
 import React, {useEffect} from 'react';
-import {useSelector} from 'react-redux'
+import {useSelector, useDispatch} from 'react-redux'
+import {
+    fetchposts,
+    fetchpostsTwo,
+    fetchpostsThree,
+    fetchpostsFour,
+    fetchpostsSix,
+    fetchpostsSeven
+} from '../../../store/actions/postActions';
 import ContentItem from '../ContentItem/ContentItem';
-import {apiRequestCategoriesAddItems} from '../../../ApiRequestion/API';
-import {changingFlag, changingPagination} from '../../../redux/action';
 import styles from '../../../styles/Content.module.css';
 
 export default function Content() {
 
-    const arrayCategoryId = useSelector((state) => state.arrayCategoryId);
+    const dispatch = useDispatch();
 
-    const maxPagesPagination = useSelector((state) => state.maxPagesPagination);
+    const arrayCategoryId = useSelector((state) => state.post.arrayCategoryId[0]);
 
-    const categoryId = useSelector((state) => state.categoryId);
+    const maxPagesPagination = useSelector((state) => state.post.maxPagesPagination);
 
-    const flagLoad = useSelector((state) => state.flagLoad);
+    const categoryId = useSelector((state) => state.post.categoryId);
 
-    let pagNum = useSelector((state) => state.pagNum);
+    const flagLoad = useSelector((state) => state.post.flagLoad);
+
+    let pagNum = useSelector((state) => state.post.pagNum);
 
     let page = [...maxPagesPagination];
 
@@ -41,16 +49,16 @@ export default function Content() {
         page = [1, 2, 3, 4];
         pagNum = 1;
     }
-    console.log(pagNum, maxPagesPagination.length)
+
     return (
         <div className={styles.content}>
             <div className={styles.content__container}>
                 <div className={!flagLoad ? styles.content__containerLoading__false : styles.content__containerLoading}>
-                    <img src='img/down.png' className="load__img" alt="logo"/>
+                    <img src='img/down.png' className={styles.load__img} alt="logo"/>
                 </div>
                 {arrayCategoryId && arrayCategoryId.map(item =>
                     <div
-                        className={styles.ulList__element}
+                        className={styles.content__containerList}
                         key={item.id}
                     >
                         <ContentItem item={item}/>
@@ -58,29 +66,31 @@ export default function Content() {
                 )}
             </div>
             <div className={styles.content__pages}>
-                {pagNum >= page.length ?
-                    <div>
-                        <button className={styles.content__pagesButton}>В начало</button>
-                    </div>
-                    :
-                    ''
-                }
+                <div>
+                    <button
+                        className={pagNum >= page.length ? styles.content__pagesButton : styles.content__pagesButton__none}
+                        onClick={(e) => dispatch(fetchpostsThree(+categoryId, 1))}
+                    >
+                        В начало
+                    </button>
+                </div>
                 {page.map((page, index) =>
                     <div
                         key={index}
                         className={pagNum === page ? styles.content__pagesCount__true : styles.content__pagesCount}
-                        onClick={(e) => apiRequestCategoriesAddItems(+categoryId, page)}
+                        onClick={(e) => dispatch(fetchpostsThree(+categoryId, page))}
                     >
                         {page}
                     </div>
                 )}
-                {pagNum <= maxPagesPagination.length - 3 ?
-                    <div>
-                        <button className={styles.content__pagesButton}>В конец</button>
-                    </div>
-                    :
-                    ''
-                }
+                <div>
+                    <button
+                        className={pagNum <= maxPagesPagination.length - 3 ? styles.content__pagesButton : styles.content__pagesButton__none}
+                        onClick={(e) => dispatch(fetchpostsThree(+categoryId, maxPagesPagination[maxPagesPagination.length - 1]))}
+                    >
+                        В конец
+                    </button>
+                </div>
             </div>
         </div>
     );

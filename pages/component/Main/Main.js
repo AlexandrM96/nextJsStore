@@ -8,7 +8,7 @@ export default function Main() {
     <main className="main">
       <section className={styles.main__container }>
         <Aside />
-        {/* <Content /> */}
+         <Content />
       </section>
     </main>
   );

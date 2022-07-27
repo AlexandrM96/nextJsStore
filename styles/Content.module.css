@@ -3,6 +3,10 @@
     width: 1000px;
 }
 
+.content__containerList {
+    margin-top: 10px;
+}
+
 .content__containerLoading__false {
     display: none;
 }
@@ -47,6 +51,10 @@
     border: 0;
     padding: 5px 5px;
     border-radius: 100px;
+}
+
+.content__pagesButton__none {
+   display: none;
 }
 
 .content__pagesCount {
