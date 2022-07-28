@@ -16,7 +16,6 @@ function reducer(state = initialState, action) {
             const loadOne = action.payload.flagLoad;
             state.flagLoad = loadOne;
             const newArrayGeneralCategories = [...state.arrayGeneralCategories];
-            console.log(state.arrayGeneralCategories)
             return { ...state, arrayGeneralCategories: newArrayGeneralCategories[0] }
         case 'API_REQUEST_CATEGORIES':
             if (state.arrayCategories !== []) {
