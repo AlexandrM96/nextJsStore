@@ -5,3 +5,42 @@
 .filter__container {
 
 }
+
+.filter__containerWord {
+width: 100%;
+}
+
+.filter__wordInput {
+    width: 77%;
+}
+
+.filter__wordButton {
+    background: #0070f3;
+    color: white;
+    border: 0;
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-left: 10px;
+    cursor: pointer;
+}
+
+.filter__wordButton:hover {
+  background: #0157c4;
+}
+
+.filter__containerPrice {
+display: flex;
+}
+
+.filter__price{
+text-align: center;
+    margin-right: 50px;
+}
+
+.filter__pricePar{
+    margin: 0;
+}
+
+.priceInput {
+
+}

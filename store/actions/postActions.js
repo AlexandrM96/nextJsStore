@@ -115,3 +115,22 @@ export const fetchpostsSeven = (num) => async dispatch => {
         }
     })
 }
+
+export const fetchpostsEight = (value) => async dispatch => {
+    fetch(`${baseUrl}/products?search=${value}`)
+        .then((response) => response.json())
+        .then((data) => {
+                dispatch({
+                    type: types.API_REQUEST_CATEGORY_ADD_ITEMS,
+                    payload: {
+                        result: data.data,
+                        pagination: data.pagination,
+                        flagLoad: false
+                    }
+                })
+            }
+        )
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+}

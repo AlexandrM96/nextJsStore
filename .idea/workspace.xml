@@ -2,14 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="94866967-e93c-4119-a144-7483b0d40e87" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/pages/component/Filter/Filter.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/styles/Filter.module.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/component/Aside/Aside.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/component/Aside/Aside.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/component/ContentItem/ContentItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/component/ContentItem/ContentItem.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/redux/reducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/redux/reducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/ContentItem.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles/ContentItem.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/component/Filter/Filter.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/component/Filter/Filter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/actions/postActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/store/actions/postActions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/reducers/types.js" beforeDir="false" afterPath="$PROJECT_DIR$/store/reducers/types.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/Filter.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles/Filter.module.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +66,8 @@
       <workItem from="1658905524228" duration="19186000" />
       <workItem from="1658947674630" duration="6092000" />
       <workItem from="1658991685217" duration="1027000" />
-      <workItem from="1658992747443" duration="14946000" />
+      <workItem from="1658992747443" duration="15582000" />
+      <workItem from="1659077851503" duration="7565000" />
     </task>
     <servers />
   </component>
