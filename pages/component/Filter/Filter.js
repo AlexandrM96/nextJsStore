@@ -40,7 +40,8 @@ export default function Filter() {
                     />
                     <button className={styles.filter__wordButton}
                             onClick={() => (dispatch(fetchpostsEight(state.settingName)))}
-                    >Поиск
+                    >
+                        Поиск
                     </button>
                 </div>
                 <div className={styles.filter__containerPrice}>
@@ -57,7 +58,7 @@ export default function Filter() {
                     </div>
                     <div className={styles.filter__price}>
                         <p className={styles.filter__pricePar}>
-                            Цена до {state.settingName}
+                            Цена до
                         </p>
                         <input
                             className={styles.filter__priceInput}

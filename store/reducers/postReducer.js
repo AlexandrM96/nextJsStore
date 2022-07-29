@@ -11,9 +11,11 @@ const initalState = {
     maxPagesPagination: [],
     categoryId: '',
     flagLoad: false,
-    pagNum: 1
+    pagNum: 1,
+    search : ''
 }
 export const postReducer = (state = initalState, action) => {
+    console.log(state);
     switch (action.type) {
         case types.GET_POSTS:
             return {
@@ -42,7 +44,9 @@ export const postReducer = (state = initalState, action) => {
                 state.arrayCategoryId = []
                 state.maxPagesPagination = []
             }
-            ;
+            const search = action.payload.search;
+            state.search = search;
+            console.log('sssssssss',state.search)
             const arrayCategoryId = action.payload.result.products;
             const arrayPagination = action.payload.result.pagination.max_pages;
             let countPagination = 0;
@@ -56,12 +60,10 @@ export const postReducer = (state = initalState, action) => {
             const newMaxPagesPagination = [...state.maxPagesPagination];
             const newArrayCategoryId = [...state.arrayCategoryId];
             return {...state, arrayCategoryId: newArrayCategoryId, maxPagesPagination: newMaxPagesPagination}
-
         case types.ADD_ID_CATEGORY:
             if (state.categoryId !== '') {
                 state.categoryId = ''
             }
-            ;
             const categoryId = action.payload.id;
             state.categoryId = categoryId;
             return {...state}

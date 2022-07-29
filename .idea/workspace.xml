@@ -3,10 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="94866967-e93c-4119-a144-7483b0d40e87" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/component/Content/Content.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/component/Content/Content.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/component/Filter/Filter.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/component/Filter/Filter.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/store/actions/postActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/store/actions/postActions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/reducers/types.js" beforeDir="false" afterPath="$PROJECT_DIR$/store/reducers/types.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/Filter.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles/Filter.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/reducers/postReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/store/reducers/postReducer.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -29,9 +29,6 @@
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
-  </component>
-  <component name="ProblemsViewState">
-    <option name="selectedIndex" value="1" />
   </component>
   <component name="ProjectId" id="2CTHJnyH6ge82z0QIeXYSk32ref" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -67,7 +64,7 @@
       <workItem from="1658947674630" duration="6092000" />
       <workItem from="1658991685217" duration="1027000" />
       <workItem from="1658992747443" duration="15582000" />
-      <workItem from="1659077851503" duration="7565000" />
+      <workItem from="1659077851503" duration="12766000" />
     </task>
     <servers />
   </component>

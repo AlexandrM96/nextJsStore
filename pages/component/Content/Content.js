@@ -1,13 +1,5 @@
-import React, {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux'
-import {
-    fetchposts,
-    fetchpostsTwo,
-    fetchpostsThree,
-    fetchpostsFour,
-    fetchpostsSix,
-    fetchpostsSeven
-} from '../../../store/actions/postActions';
+import { fetchpostsThree } from '../../../store/actions/postActions';
 import ContentItem from '../ContentItem/ContentItem';
 import styles from '../../../styles/Content.module.css';
 
@@ -21,7 +13,11 @@ export default function Content() {
 
     const categoryId = useSelector((state) => state.post.categoryId);
 
+    console.log(categoryId);
+
     const flagLoad = useSelector((state) => state.post.flagLoad);
+
+    const search = useSelector((state) =>state.post.search);
 
     let pagNum = useSelector((state) => state.post.pagNum);
 
@@ -69,7 +65,7 @@ export default function Content() {
                 <div>
                     <button
                         className={pagNum >= page.length ? styles.content__pagesButton : styles.content__pagesButton__none}
-                        onClick={(e) => dispatch(fetchpostsThree(+categoryId, 1))}
+                        onClick={(e) => dispatch(fetchpostsThree(+categoryId, 1, search))}
                     >
                         В начало
                     </button>
@@ -78,7 +74,7 @@ export default function Content() {
                     <div
                         key={index}
                         className={pagNum === page ? styles.content__pagesCount__true : styles.content__pagesCount}
-                        onClick={(e) => dispatch(fetchpostsThree(+categoryId, page))}
+                        onClick={(e) => dispatch(fetchpostsThree(+categoryId, page, search))}
                     >
                         {page}
                     </div>
@@ -86,7 +82,7 @@ export default function Content() {
                 <div>
                     <button
                         className={pagNum <= maxPagesPagination.length - 3 ? styles.content__pagesButton : styles.content__pagesButton__none}
-                        onClick={(e) => dispatch(fetchpostsThree(+categoryId, maxPagesPagination[maxPagesPagination.length - 1]))}
+                        onClick={(e) => dispatch(fetchpostsThree(+categoryId, maxPagesPagination[maxPagesPagination.length - 1],search))}
                     >
                         В конец
                     </button>

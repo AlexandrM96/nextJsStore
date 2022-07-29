@@ -3,6 +3,7 @@ import * as types from '../reducers/types';
 let baseUrl = `https://bion.biz-mark.ru/api/v1/general`;
 
 export const fetchposts = () => async dispatch => {
+
     fetch(`${baseUrl}/categories`)
         .then((response) => response.json())
         .then((data) => {
@@ -18,6 +19,7 @@ export const fetchposts = () => async dispatch => {
 }
 
 export const fetchpostsTwo = () => async dispatch => {
+
     fetch(`${baseUrl}/categories`)
         .then((response) => response.json())
         .then((data) => {
@@ -36,7 +38,8 @@ export const fetchpostsTwo = () => async dispatch => {
 
 }
 
-export const fetchpostsThree = (id, page) => async dispatch => {
+export const fetchpostsThree = (id, page, search) => async dispatch => {
+
     dispatch({
         type: types.CHANGING_THE_FLAG,
         payload: {
@@ -50,13 +53,17 @@ export const fetchpostsThree = (id, page) => async dispatch => {
             num: page
         }
     })
-    fetch(`${baseUrl}/products?page=${+page}&category=${id}`)
+
+    const api = id === 0 ? `${baseUrl}/products?page=${page}&search=${search}` : `${baseUrl}/products?page=${+page}&category=${id}`;
+
+    fetch(api)
         .then((response) => response.json())
         .then((data) => {
                 dispatch({
                     type: types.API_REQUEST_CATEGORY_ADD_ITEMS,
                     payload: {
                         result: data.data,
+                        search: search,
                         pagination: data.pagination,
                         flagLoad: false
                     }
@@ -90,6 +97,7 @@ export const fetchpostsFour = (item) => async dispatch => {
 }
 
 export const fetchpostsFive = () => async dispatch => {
+
     dispatch({
         type: types.ADD_ID_CATEGORY,
         payload: {
@@ -108,6 +116,7 @@ export const fetchpostsSix = (flag) => async dispatch => {
 }
 
 export const fetchpostsSeven = (num) => async dispatch => {
+
     dispatch({
         type: types.CHANGING_PAGINATION,
         payload: {
@@ -117,6 +126,7 @@ export const fetchpostsSeven = (num) => async dispatch => {
 }
 
 export const fetchpostsEight = (value) => async dispatch => {
+
     fetch(`${baseUrl}/products?search=${value}`)
         .then((response) => response.json())
         .then((data) => {
@@ -124,6 +134,7 @@ export const fetchpostsEight = (value) => async dispatch => {
                     type: types.API_REQUEST_CATEGORY_ADD_ITEMS,
                     payload: {
                         result: data.data,
+                        search: value,
                         pagination: data.pagination,
                         flagLoad: false
                     }
