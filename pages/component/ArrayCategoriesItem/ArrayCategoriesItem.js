@@ -1,17 +1,18 @@
 import {apiRequestCategoriesAddItems} from '../../../ApiRequestion/API';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {addIdCategory, changingFlag} from '../../../redux/action';
 import {
-    fetchposts,
-    fetchpostsTwo,
     fetchpostsThree,
-    fetchpostsFour,
     fetchpostsSix,
     fetchpostsSeven
 } from '../../../store/actions/postActions';
 import styles from '../../../styles/ArrayCategoriesItem.module.css';
 
 export default function ArrayCategoriesItem(props) {
+
+    const minPriсe = useSelector((state) => state.post.minPrice);
+
+    const maxPriсe = useSelector((state) => state.post.maxPrice);
 
     const dispatch = useDispatch();
 
@@ -22,7 +23,7 @@ export default function ArrayCategoriesItem(props) {
         dispatch(fetchpostsSix(true))
         dispatch(fetchpostsSeven(page))
         console.log('click')
-        dispatch(fetchpostsThree(id, page))
+        dispatch(fetchpostsThree(id, 1, '', minPriсe, maxPriсe))
     }
 
     return (

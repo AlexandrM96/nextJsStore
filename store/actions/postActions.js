@@ -38,7 +38,9 @@ export const fetchpostsTwo = () => async dispatch => {
 
 }
 
-export const fetchpostsThree = (id, page, search) => async dispatch => {
+export const fetchpostsThree = (id, page, search, minPriсe, maxPriсe) => async dispatch => {
+
+    console.log('fetchpostsThree', id, page, search, minPriсe, maxPriсe);
 
     dispatch({
         type: types.CHANGING_THE_FLAG,
@@ -54,7 +56,13 @@ export const fetchpostsThree = (id, page, search) => async dispatch => {
         }
     })
 
-    const api = id === 0 ? `${baseUrl}/products?page=${page}&search=${search}` : `${baseUrl}/products?page=${+page}&category=${id}`;
+    const api = id === 0 ?
+        `${baseUrl}/products?page=${page}&search=${search}&filter[price][min]=${minPriсe}&filter[price][max]=${maxPriсe}`
+        :
+        +minPriсe === 0 && +maxPriсe === 9999999 ?
+            `${baseUrl}/products?page=${+page}&category=${id}`
+            :
+            `${baseUrl}/products?page=${+page}&category=${id}&filter[price][min]=${minPriсe}&filter[price][max]=${maxPriсe}`;
 
     fetch(api)
         .then((response) => response.json())
@@ -65,7 +73,9 @@ export const fetchpostsThree = (id, page, search) => async dispatch => {
                         result: data.data,
                         search: search,
                         pagination: data.pagination,
-                        flagLoad: false
+                        flagLoad: false,
+                        minPrise: minPriсe,
+                        maxPrise: maxPriсe
                     }
                 })
             }
@@ -125,9 +135,32 @@ export const fetchpostsSeven = (num) => async dispatch => {
     })
 }
 
-export const fetchpostsEight = (value) => async dispatch => {
+export const fetchpostsEight = (page, id, value, minPriсe, maxPriсe) => async dispatch => {
 
-    fetch(`${baseUrl}/products?search=${value}`)
+    console.log('action.payload.minPrice', value, minPriсe, maxPriсe);
+    if (minPriсe === '') {
+        minPriсe = 0;
+    }
+
+    if (maxPriсe === '') {
+        maxPriсe = 9999999;
+    }
+
+    dispatch({
+        type: types.FILTER_PRICE,
+        payload: {
+            minPrices: minPriсe,
+            maxPrices: maxPriсe
+        }
+    })
+    console.log('idddddddddddddddddddddd', id)
+    const api = id !== '' ?
+        `${baseUrl}/products?page=${+page}&category=${id}&filter[price][min]=${minPriсe}&filter[price][max]=${maxPriсe}`
+        :
+        `${baseUrl}/products?search=${value}&filter[price][min]=${+minPriсe}&filter[price][max]=${maxPriсe}`;
+
+
+    fetch(api)
         .then((response) => response.json())
         .then((data) => {
                 dispatch({
@@ -136,7 +169,7 @@ export const fetchpostsEight = (value) => async dispatch => {
                         result: data.data,
                         search: value,
                         pagination: data.pagination,
-                        flagLoad: false
+                        flagLoad: false,
                     }
                 })
             }

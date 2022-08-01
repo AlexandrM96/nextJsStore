@@ -25,6 +25,7 @@ export default function Home() {
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
             <header>
+                <button>корзина</button>
             </header>
             <main className={styles.main}>
                 <h1 className={styles.title}>

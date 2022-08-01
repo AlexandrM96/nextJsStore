@@ -4,12 +4,22 @@ import {useSelector, useDispatch} from 'react-redux';
 import {apiRequestCategories, apiRequestCategoriesAddItems} from '../../../ApiRequestion/API';
 import ArrayCategoriesItem from '../ArrayCategoriesItem/ArrayCategoriesItem';
 import {changingFlag} from '../../../redux/action';
-import {fetchposts, fetchpostsTwo, fetchpostsThree, fetchpostsFour, fetchpostsSix} from '../../../store/actions/postActions';
+import {
+    fetchposts,
+    fetchpostsTwo,
+    fetchpostsThree,
+    fetchpostsFour,
+    fetchpostsSix
+} from '../../../store/actions/postActions';
 import styles from '../../../styles/AsideItem.module.css';
 
 export default function AsideItem(props) {
 
     const arrayCategories = useSelector((state) => state.post.arrayCategories[0]);
+
+    const minPrise = useSelector((state) => state.post.minPrice);
+
+    const maxPrise = useSelector((state) => state.post.maxPrice);
 
     const dispatch = useDispatch();
 
@@ -32,16 +42,17 @@ export default function AsideItem(props) {
         })
     }
 
-    const clickCategories = () => {
-        const id = props.item.id;
-        fetchpostsThree(id);
-    }
+    // const clickCategories = () => {
+    //     const id = props.item.id;
+    //     console.log('clickCategoriessssssss',id, minPrise, maxPrise);
+    //     dispatch(fetchpostsThree(id, 1, '', minPrise, maxPrise));
+    // }
 
     return (
 
         <div
             className={styles.asideItem__element}
-            onClick={clickCategories}
+            // onClick={() =>  dispatch(fetchpostsThree( props.item.id, 1, '', 0, 99999999999))}
             onMouseEnter={() => (ChangeOver(props.item.children_id_list))}
             onMouseLeave={() => (
                 setState(prev => {
@@ -55,7 +66,8 @@ export default function AsideItem(props) {
 
             <ul className={state.status === true ? styles.asideItem__elementList : styles.asideItem__elementList__none}>
                 {arrayCategories && arrayCategories.map(item =>
-                    <li key={item.id}>
+                    <li
+                        key={item.id}>
                         <ArrayCategoriesItem item={item}/>
                     </li>
                 )}

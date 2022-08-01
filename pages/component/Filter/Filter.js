@@ -3,15 +3,22 @@ import {
     fetchpostsEight
 } from '../../../store/actions/postActions';
 import styles from '../../../styles/Filter.module.css'
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
 export default function Filter() {
 
     const dispatch = useDispatch();
+
+    const categoryId = useSelector((state) => state.post.categoryId);
+
+    const pagNum = useSelector((state) => state.post.pagNum);
+
     const [state, setState] = useState(() => {
         return {
             settingName: '',
-            statusSettingName: false
+            statusSettingName: false,
+            minPrice: 0,
+            maxPrice: 9999999
         }
     });
 
@@ -23,7 +30,6 @@ export default function Filter() {
                 [event.target.name]: event.target.value,
             }
         })
-        console.log(state.settingName)
     };
 
     return (
@@ -39,7 +45,7 @@ export default function Filter() {
                         onChange={changeInput}
                     />
                     <button className={styles.filter__wordButton}
-                            onClick={() => (dispatch(fetchpostsEight(state.settingName)))}
+                            onClick={() => (dispatch(fetchpostsEight(pagNum, categoryId, state.settingName, state.minPrice, state.maxPrice)))}
                     >
                         Поиск
                     </button>
@@ -50,9 +56,9 @@ export default function Filter() {
                         <input
                             className={styles.priceInput}
                             type="number"
-                            id="settingPrice"
-                            name="settingPrice"
-
+                            id="minPrice"
+                            name="minPrice"
+                            onChange={changeInput}
                             placeholder="От"
                         />
                     </div>
@@ -63,14 +69,18 @@ export default function Filter() {
                         <input
                             className={styles.filter__priceInput}
                             type="number"
-                            id="settingPrice"
-                            name="settingPrice"
-
+                            id="maxPrice"
+                            name="maxPrice"
+                            onChange={changeInput}
                             placeholder="До"
                         />
                     </div>
                 </div>
-                <button className={styles.filter__wordButton}>Применить</button>
+                <button
+                    onClick={() => (dispatch(fetchpostsEight(pagNum, categoryId, state.settingName, state.minPrice, state.maxPrice)))}
+                    className={styles.filter__wordButton}>Применить
+                </button>
+                <button className={styles.filter__wordButton}>Очистить</button>
             </div>
         </div>
     )

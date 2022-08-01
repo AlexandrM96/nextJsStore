@@ -12,7 +12,9 @@ const initalState = {
     categoryId: '',
     flagLoad: false,
     pagNum: 1,
-    search : ''
+    search : '',
+    minPrice: 0,
+    maxPrice: 9999999
 }
 export const postReducer = (state = initalState, action) => {
     console.log(state);
@@ -41,12 +43,20 @@ export const postReducer = (state = initalState, action) => {
             return {...state, arrayCategories: newArrayCategories}
         case types.API_REQUEST_CATEGORY_ADD_ITEMS:
             if (state.arrayCategoryId !== [] || state.maxPagesPagination !== []) {
-                state.arrayCategoryId = []
-                state.maxPagesPagination = []
+                state.arrayCategoryId = [];
+                state.maxPagesPagination = [];
+                state.search = action.payload.search;
+                console.log(action.payload.minPrice, action.payload.maxPrice)
+                if (action.payload.minPrice !== undefined || action.payload.maxPrice !== undefined) {
+                    state.minPrice = action.payload.minPrice;
+                    state.maxPrice = action.payload.maxPrice;
+                }
             }
-            const search = action.payload.search;
-            state.search = search;
-            console.log('sssssssss',state.search)
+            // if((state.action.payload.minPrice !== undefined) || (action.payload.maxPrice !== undefined) || (action.payload.search!== undefined )) {
+            //     state.search = action.payload.search;
+            //     state.minPrice = action.payload.minPrice;
+            //     state.maxPrice = action.payload.maxPrice;
+            // }
             const arrayCategoryId = action.payload.result.products;
             const arrayPagination = action.payload.result.pagination.max_pages;
             let countPagination = 0;
@@ -76,6 +86,12 @@ export const postReducer = (state = initalState, action) => {
             // console.log(pagNum)
             // state.pagNum = pagNum;
             return {...state, pagNum: pagNum}
+        case types.FILTER_PRICE:
+            console.log('xxxxxxxxxxxxxxxxx', action.payload.minPrices,action.payload.minPrices)
+            state.minPrice = action.payload.minPrices;
+            state.maxPrice = action.payload.maxPrices;
+            console.log(state.minPrice,state.maxPrice)
+            return {...state}
         default:
             return state
     }

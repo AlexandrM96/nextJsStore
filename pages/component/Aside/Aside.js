@@ -23,15 +23,6 @@ const Aside = ({users}) => {
             <aside className={styles.aside}>
                 <div className={styles.aside__container}>
                     <ul className={styles.aside__container__ulList}>
-                        {/*{users.data.categories.map(user =>*/}
-                        {/*    <li*/}
-                        {/*        className={styles.ulList__element}*/}
-                        {/*        key={user.id}>*/}
-                        {/*        <Link href={`/users/${user.id}`}>*/}
-                        {/*            <a>{user.name}</a>*/}
-                        {/*        </Link>*/}
-                        {/*    </li>*/}
-                        {/*)}*/}
                         {arrayGeneralCategories && arrayGeneralCategories.map(item =>
                             <li
                                 className={styles.ulList__element}
@@ -53,7 +44,7 @@ export async function getStaticProps(context) {
     const baseUrl = `https://bion.biz-mark.ru/api/v1/general`;
     const response = await fetch(`${baseUrl}/categories`)
     const users = await response.json()
-    // console.log('asdasdasdasd3333333', users);
+    console.log('asdasdasdasd3333333', users);
     return {
         props: {users}, // will be passed to the page component as props
     }

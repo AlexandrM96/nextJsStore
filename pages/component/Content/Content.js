@@ -19,6 +19,12 @@ export default function Content() {
 
     const search = useSelector((state) =>state.post.search);
 
+    const minPriсe = useSelector((state) =>state.post.minPrice);
+
+    const maxPriсe = useSelector((state) =>state.post.maxPrice);
+
+    console.log('content', minPriсe, maxPriсe);
+
     let pagNum = useSelector((state) => state.post.pagNum);
 
     let page = [...maxPagesPagination];
@@ -65,7 +71,7 @@ export default function Content() {
                 <div>
                     <button
                         className={pagNum >= page.length ? styles.content__pagesButton : styles.content__pagesButton__none}
-                        onClick={(e) => dispatch(fetchpostsThree(+categoryId, 1, search))}
+                        onClick={(e) => dispatch(fetchpostsThree(+categoryId, 1, search, minPriсe, maxPriсe))}
                     >
                         В начало
                     </button>
@@ -74,7 +80,7 @@ export default function Content() {
                     <div
                         key={index}
                         className={pagNum === page ? styles.content__pagesCount__true : styles.content__pagesCount}
-                        onClick={(e) => dispatch(fetchpostsThree(+categoryId, page, search))}
+                        onClick={(e) => dispatch(fetchpostsThree(+categoryId, page, search, minPriсe, maxPriсe))}
                     >
                         {page}
                     </div>
@@ -82,7 +88,7 @@ export default function Content() {
                 <div>
                     <button
                         className={pagNum <= maxPagesPagination.length - 3 ? styles.content__pagesButton : styles.content__pagesButton__none}
-                        onClick={(e) => dispatch(fetchpostsThree(+categoryId, maxPagesPagination[maxPagesPagination.length - 1],search))}
+                        onClick={(e) => dispatch(fetchpostsThree(+categoryId, maxPagesPagination[maxPagesPagination.length - 1],search, minPriсe, maxPriсe))}
                     >
                         В конец
                     </button>
