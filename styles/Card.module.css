@@ -1,0 +1,17 @@
+
+.card__container {
+    width: 1000px;
+    margin: 0 auto;
+    border-radius: 5px;
+    background: #7bc1d9;
+}
+
+.card__container__listElement {
+    display: flex;
+    justify-content: space-between;
+    border-radius: 5px;
+    border: 1px solid black;
+    margin-bottom: 10px;
+    list-style-type: none;
+    color: white;
+}

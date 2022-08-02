@@ -1,59 +1,131 @@
-
 import styles from '../../../styles/ContentItem.module.css';
 import * as types from "../../../store/reducers/types";
+import React, {useState} from "react";
+import Link from "next/link";
 
 export default function ContentItem(props) {
 
-const clickAddToCard = () => {
-
-    const cardUserId = localStorage.getItem('cardUserId')
-
-    const itemId = props.item.id;
-
-    const baseUrl = `https://bion.biz-mark.ru/api/v1/general`;
-
-    const api = `${baseUrl}/cart?offer_id=${itemId}&quantity=1`;
-
-    fetch(api, {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'cart': cardUserId
-        },
-        // body: JSON.stringify({
-        //     offer_id: itemId,
-        //     quantity: 1
-        // })
+    const [state, setState] = useState(() => {
+        return {
+            displayNum: 1,
+            btn: true,
+            flag: false
+        }
     })
-        .then((response) => response.json())
-        .then((data) => {
-                console.log(data);
-            localStorage.setItem('cardUserId', data.message);
+
+    const clickAddToCard = () => {
+
+        setState(prev => {
+            return {
+                ...prev,
+                flag: true
             }
-        )
-        .catch((error) => {
-            console.error('Error:', error);
-        });
- }
+        })
+
+        const cardUserId = localStorage.getItem('cardUserId');
+
+        console.log(cardUserId);
+
+        const itemId = props.item.id;
+
+        const baseUrl = `https://bion.biz-mark.ru/api/v1/general`;
+
+        const api = `${baseUrl}/cart?offer_id=${itemId}&quantity=${state.displayNum}`;
+
+        fetch(api, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'cart': cardUserId
+            },
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                    localStorage.setItem('cardUserId', data.message);
+                    setState(prev => {
+                        return {
+                            ...prev,
+                            flag: false
+                        }
+                    })
+                }
+            )
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    }
+
+    const handleClick = (e) => {
+        const plusMinus = e.target.innerText;
+        const quantity = props.item.offers[0].quantity;
+        // if (state.displayNum < quantity) {
+        if (state.displayNum <= 1) {
+            plusMinus === '+' ?
+                setState(prev => {
+                    return {
+                        ...prev,
+                        displayNum: state.displayNum + 1
+                    }
+                })
+                :
+                setState(prev => {
+                    return {
+                        ...prev,
+                        btn: false
+                    }
+                })
+        } else {
+            plusMinus === '+' ?
+                setState(prev => {
+                    return {
+                        ...prev,
+                        displayNum: state.displayNum + 1
+                    }
+                })
+                :
+                setState(prev => {
+                    return {
+                        ...prev,
+                        displayNum: state.displayNum - 1
+                    }
+                })
+        }
+
+    };
+
+    console.log(props)
 
     return (
         <div className={styles.contentItem}>
-            //тут
             <div className={styles.contentItem__container}>
-                <div className={styles.contentItem__containerInfo}>
-                    <img src='https://aristokratrest.com/files/aristokratrest/image/no_product.jpg' alt='play'/>
-                    <p>{props.item.name}</p>
-                </div>
+                <Link href={`/category/${props.item.slug}`}>
+                    <a>
+                        <div className={styles.contentItem__containerInfo}>
+                            <img src='https://aristokratrest.com/files/aristokratrest/image/no_product.jpg' alt='play'/>
+                            <p>{props.item.name}</p>
+                        </div>
+                    </a>
+                </Link>
                 <div className={styles.contentItem__containerPriseAndCart}>
                     <div>
                         {props.item.offers[0].price}{props.item.offers[0].currency}
                     </div>
-                    <div>
-
+                    <div className={styles.listItemCard__itemButtons}>
+                        <button onClick={handleClick}>+</button>
+                        <div>
+                            {state.displayNum}
+                        </div>
+                        <button onClick={handleClick}>-</button>
                     </div>
                     <div className={styles.contentItem__containerPriseAndCartButton}>
-                        <button onClick={clickAddToCard} className={styles.priseAndCartButton__button} >В корзину</button>
+                        <button onClick={clickAddToCard} className={styles.priseAndCartButton__button}>
+                            {state.flag === false ?
+                                <span>В корзину</span>
+                                :
+                                <img src='img/down.png' className={styles.load__img} alt="logo"/>
+                            }
+                        </button>
                     </div>
                 </div>
             </div>

@@ -4,10 +4,14 @@ import {
 } from '../../../store/actions/postActions';
 import styles from '../../../styles/Filter.module.css'
 import {useDispatch, useSelector} from "react-redux";
+import Link from "next/link";
 
 export default function Filter() {
 
     const dispatch = useDispatch();
+
+    // const cardId = localStorage.getItem('cardUserId');
+    // console.log('local', cardId);
 
     const categoryId = useSelector((state) => state.post.categoryId);
 
@@ -32,6 +36,19 @@ export default function Filter() {
         })
     };
 
+    const clickRemove = () => {
+        dispatch(fetchpostsEight(pagNum, categoryId, '', 0, 9999999));
+        setState(prev => {
+            return {
+                ...prev,
+                settingName: '',
+                statusSettingName: false,
+                minPrice: 0,
+                maxPrice: 9999999
+            }
+        })
+    }
+
     return (
         <div className={styles.filter}>
             <div className={styles.filter__container}>
@@ -41,6 +58,7 @@ export default function Filter() {
                         type="settingName"
                         id="settingName"
                         name="settingName"
+                        value={state.settingName}
                         placeholder="Поиск..."
                         onChange={changeInput}
                     />
@@ -58,6 +76,7 @@ export default function Filter() {
                             type="number"
                             id="minPrice"
                             name="minPrice"
+                            value={state.minPrice}
                             onChange={changeInput}
                             placeholder="От"
                         />
@@ -71,6 +90,7 @@ export default function Filter() {
                             type="number"
                             id="maxPrice"
                             name="maxPrice"
+                            value={state.maxPrice}
                             onChange={changeInput}
                             placeholder="До"
                         />
@@ -80,7 +100,15 @@ export default function Filter() {
                     onClick={() => (dispatch(fetchpostsEight(pagNum, categoryId, state.settingName, state.minPrice, state.maxPrice)))}
                     className={styles.filter__wordButton}>Применить
                 </button>
-                <button className={styles.filter__wordButton}>Очистить</button>
+                <button
+                    onClick={clickRemove}
+                    className={styles.filter__wordButton}
+                >
+                    Очистить
+                </button>
+                <Link href={`/card`}>
+                    <a className={styles.filter__wordButton}>Корзина</a>
+                </Link>
             </div>
         </div>
     )

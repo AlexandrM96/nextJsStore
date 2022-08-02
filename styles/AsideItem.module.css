@@ -19,3 +19,7 @@
 .asideItem__elementList__none {
   display: none;
 }
+
+.listItem-Card__itemButtons {
+  display: flex;
+}

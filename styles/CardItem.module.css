@@ -1,0 +1,11 @@
+.cardItem__containerPriceAndButtons {
+    display: flex;
+}
+
+.cardItem__containerPrice {
+    margin-left: 10px;
+}
+
+.containerPriceAndButtons__button {
+    cursor: pointer;
+}

@@ -13,8 +13,6 @@ export default function Content() {
 
     const categoryId = useSelector((state) => state.post.categoryId);
 
-    console.log(categoryId);
-
     const flagLoad = useSelector((state) => state.post.flagLoad);
 
     const search = useSelector((state) =>state.post.search);
@@ -22,8 +20,6 @@ export default function Content() {
     const minPriсe = useSelector((state) =>state.post.minPrice);
 
     const maxPriсe = useSelector((state) =>state.post.maxPrice);
-
-    console.log('content', minPriсe, maxPriсe);
 
     let pagNum = useSelector((state) => state.post.pagNum);
 

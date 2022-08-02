@@ -7,7 +7,7 @@
 }
 
 .filter__containerWord {
-width: 100%;
+    width: 100%;
 }
 
 .filter__wordInput {
@@ -22,22 +22,24 @@ width: 100%;
     border-radius: 5px;
     margin-left: 10px;
     cursor: pointer;
+    font-size: 13px;
 }
 
 .filter__wordButton:hover {
-  background: #0157c4;
+    background: #0157c4;
 }
 
 .filter__containerPrice {
-display: flex;
+    display: flex;
+    margin-bottom: 10px;
 }
 
-.filter__price{
-text-align: center;
+.filter__price {
+    text-align: center;
     margin-right: 50px;
 }
 
-.filter__pricePar{
+.filter__pricePar {
     margin: 0;
 }
 

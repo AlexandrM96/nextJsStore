@@ -5,7 +5,9 @@ import {useDispatch, useSelector} from 'react-redux';
 import {fetchposts} from '../store/actions/postActions';
 import Main from './component/Main/Main';
 import Filter from './component/Filter/Filter'
+import Link from "next/link";
 import styles from '../styles/Home.module.css'
+
 
 export default function Home() {
 
@@ -25,18 +27,14 @@ export default function Home() {
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
             <header>
-                <button>корзина</button>
+
+                {/*<button>корзина</button>*/}
             </header>
             <main className={styles.main}>
                 <h1 className={styles.title}>
                     Welcome to <a href="https://nextjs.org">Next.js!</a>
                 </h1>
                 <Filter/>
-                {/*{posts && posts.map(item => (*/}
-                {/*  <h1 key={item}>*/}
-                {/*    {item.name}*/}
-                {/*  </h1>*/}
-                {/*))}*/}
                 <Main/>
             </main>
 
