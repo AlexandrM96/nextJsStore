@@ -1,21 +1,78 @@
 import Head from 'next/head'
 import Image from 'next/image'
-import {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {fetchposts} from '../store/actions/postActions';
 import Main from './component/Main/Main';
 import Filter from './component/Filter/Filter'
-import Link from "next/link";
 import styles from '../styles/Home.module.css'
+import Link from "next/link";
 
 
 export default function Home() {
+
+    const [auth, setAuth] = useState(() => {
+        return {
+            auth: false,
+            userName: ''
+        }
+    })
 
     const {posts} = useSelector(state => state.post);
 
     const dispatch = useDispatch();
 
+    const refreshCardId = (baseUrl,idCard, token) => {
+        fetch(`${baseUrl}?shop_id=${idCard}`, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            }
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                    console.log((data));
+                }
+            )
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    }
+
     useEffect(() => {
+        const baseUrl = `https://bion.biz-mark.ru/api/v1/account`;
+        const token = localStorage.getItem('tokenAuth');
+        let idCard = '';
+
+        fetch(baseUrl, {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+            }
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                idCard = localStorage.getItem('cardUserId');
+                console.log(idCard)
+                setAuth(prev => {
+                    return {
+                        ...prev,
+                        userName: data.data.name,
+                        auth: true
+                    }
+                })
+                if ( idCard !== null) {
+                    refreshCardId(baseUrl, idCard, token)
+                }
+                }
+            )
+            .catch((error) => {
+                console.error('Error:', error);
+            });
         dispatch(fetchposts());
     }, [])
 
@@ -27,29 +84,39 @@ export default function Home() {
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
             <header>
-
+                <Link href={`/account/login`}>
+                    <a className={styles.filter__wordButton}>Вход</a>
+                </Link>
+                /
+                <Link href={`/account/register`}>
+                    <a className={styles.filter__wordButton}>Регистрация</a>
+                </Link>
                 {/*<button>корзина</button>*/}
+                <div>
+                    ____________________________________________________________
+                </div>
+                <p>
+                    {auth.auth ? auth.userName : 'Авторизуйтесь!'}
+                </p>
             </header>
             <main className={styles.main}>
-                <h1 className={styles.title}>
-                    Welcome to <a href="https://nextjs.org">Next.js!</a>
-                </h1>
+                {/*<h1 className={styles.title}>*/}
+                {/*    Welcome to <a href="https://nextjs.org">Next.js!</a>*/}
+                {/*</h1>*/}
                 <Filter/>
                 <Main/>
             </main>
 
-            <footer className={styles.footer}>
-                <a
-                    href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Powered by{' '}
-                    <span className={styles.logo}>
-            <Image src="/vercel.svg" alt="Vercel Logo" width={72} height={16}/>
-          </span>
-                </a>
-            </footer>
+            {/*<footer className={styles.footer}>*/}
+            {/*</footer>*/}
         </div>
     )
 }
+// export async function getServerSideProps({params}) {
+//     const baseUrl = `https://bion.biz-mark.ru/api/v1/general/wishlist`;
+//     const response = await fetch(baseUrl);
+//     const userWishList = await response.json();
+//     return {
+//         props: {userWishList}, // will be passed to the page component as props
+//     }
+// }

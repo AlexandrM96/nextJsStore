@@ -109,6 +109,9 @@ export default function Filter() {
                 <Link href={`/card`}>
                     <a className={styles.filter__wordButton}>Корзина</a>
                 </Link>
+                <Link href={`/spisok-pokupok`}>
+                    <a className={styles.filter__wordButton}>Список покупок</a>
+                </Link>
             </div>
         </div>
     )

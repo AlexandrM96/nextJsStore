@@ -89,7 +89,6 @@ export default function Item({item}) {
                     }
                 })
         }
-
     };
 
     return (
@@ -136,13 +135,11 @@ export default function Item({item}) {
                 </div>
             </div>
         </div>
-
     )
 };
 
 export async function getServerSideProps({params}) {
     const baseUrl = `https://bion.biz-mark.ru/api/v1/general`;
-    console.log(params)
     const response = await fetch(`${baseUrl}/products/${params.id}`)
     const item = await response.json()
     return {

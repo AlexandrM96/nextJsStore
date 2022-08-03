@@ -1,0 +1,55 @@
+.registration {
+    width: 600px;
+    margin: 0 auto;
+    padding: 40px;
+    border-radius: 8px;
+    border: 2px solid black;
+    background: #dfdcdc;
+}
+
+.registration__title {
+    margin: 0;
+    text-align: center;
+    color: rgb(55, 54, 54);
+}
+
+.registration__formParagraph {
+    color: rgb(55, 54, 54);
+}
+
+.registration__formInput {
+    width: 100%;
+    padding: 5px;
+    font-size: 20px;
+    border-radius: 5px;
+    border: none;
+    color: black;
+}
+
+/*.input[type="number"] {*/
+/*    -moz-appearance: textfield;*/
+/*    -webkit-appearance: textfield;*/
+/*    appearance: textfield;*/
+/*}*/
+
+/*input[type="number"]::-webkit-outer-spin-button,*/
+/*input[type="number"]::-webkit-inner-spin-button {*/
+/*    display: none;*/
+/*}*/
+
+.registration__formButton {
+    cursor: pointer;
+    background: #496ddb;
+    color: white;
+    margin-left: 38%;
+    padding: 5px 20px;
+    font-size: 20px;
+    border: 1px solid white;
+    border-radius: 5px;
+}
+
+.registration__formButton:hover {
+    background: #4d6abf;
+    color: white;
+    border: 1px solid rgb(223, 218, 218);
+}

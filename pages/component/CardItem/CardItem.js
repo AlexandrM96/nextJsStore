@@ -1,9 +1,101 @@
 import style from '../../../styles/CardItem.module.css';
+import styles from "../../../styles/Item.module.css";
+import React, {useState} from "react";
+
 export default function CardItem(props) {
 
     console.log(props)
 
-    // const cardUserId = localStorage.getItem('cardUserId');
+    const [state, setState] = useState(() => {
+        return {
+            displayNum: props.item.quantity,
+            btn: true,
+            flag: false
+        }
+    })
+
+    const handleClick = (e) => {
+
+        setState(prev => {
+            return {
+                ...prev,
+                flag: true
+            }
+        })
+
+        const cardUserId = localStorage.getItem('cardUserId');
+
+        const itemId = props.item.offer_id;
+
+        console.log(itemId)
+
+        const plusMinus = e.target.innerText;
+
+        if (state.displayNum <= 1) {
+            plusMinus === '+' ?
+                setState(prev => {
+                    return {
+                        ...prev,
+                        displayNum: state.displayNum++
+                    }
+                })
+                :
+                setState(prev => {
+                    return {
+                        ...prev,
+                        btn: false
+                    }
+                })
+        } else {
+            plusMinus === '+' ?
+                setState(prev => {
+                    return {
+                        ...prev,
+                        displayNum: state.displayNum++
+                    }
+                })
+                :
+                setState(prev => {
+                    return {
+                        ...prev,
+                        displayNum: state.displayNum--
+                    }
+                })
+        }
+
+        const baseUrl = `https://bion.biz-mark.ru/api/v1/general`;
+
+        console.log((state.displayNum))
+
+        const quantity = plusMinus === '+' ? state.displayNum + 1 : state.displayNum - 1
+
+        const api = `${baseUrl}/cart?offer_id=${itemId}&quantity=${quantity}`;
+
+        fetch(api, {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json',
+                'cart': cardUserId
+            },
+        })
+            .then((response) => response.json())
+            .then((data) => {
+                    localStorage.setItem('cardUserId', data.message);
+                    setState(prev => {
+                        return {
+                            ...prev,
+                            flag: false
+                        }
+                    })
+                    console.log(data);
+                    location.reload();
+                }
+            )
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    };
 
     const clickRemoveItem = () => {
         console.log('удалил')
@@ -23,7 +115,7 @@ export default function CardItem(props) {
         })
             .then((response) => response.json())
             .then((data) => {
-                location.reload();
+                    location.reload();
                 }
             )
             .catch((error) => {
@@ -33,17 +125,25 @@ export default function CardItem(props) {
 
     return (
         <>
-        <p>
-            {props.item.product.name}
-        </p>
+            <p>
+                {props.item.product.name}
+            </p>
             <div className={style.cardItem__containerPriceAndButtons}>
+                <div className={styles.listItemCard__itemButtons}>
+                    <button onClick={handleClick}>+</button>
+                    <div>
+                        {state.displayNum}
+                    </div>
+                    <button onClick={handleClick}>-</button>
+                </div>
                 <p>X{props.item.quantity}</p>
                 <p className={style.cardItem__containerPrice}>
                     {props.item.price} ₽
                 </p>
                 <button
                     onClick={clickRemoveItem}
-                    className={style.containerPriceAndButtons__button}>X</button>
+                    className={style.containerPriceAndButtons__button}>X
+                </button>
             </div>
         </>
     );
