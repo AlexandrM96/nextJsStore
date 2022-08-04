@@ -2,6 +2,7 @@ import styles from '../../../styles/ContentItem.module.css';
 import * as types from "../../../store/reducers/types";
 import React, {useState} from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function ContentItem(props) {
 
@@ -24,7 +25,9 @@ export default function ContentItem(props) {
 
         const cardUserId = localStorage.getItem('cardUserId');
 
-        console.log(cardUserId);
+        const token = localStorage.getItem('tokenAuth');
+
+        console.log(cardUserId, token);
 
         const itemId = props.item.id;
 
@@ -37,11 +40,13 @@ export default function ContentItem(props) {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
                 'cart': cardUserId
             },
         })
             .then((response) => response.json())
             .then((data) => {
+                console.log(data)
                     localStorage.setItem('cardUserId', data.message);
                     setState(prev => {
                         return {
@@ -102,7 +107,10 @@ export default function ContentItem(props) {
                 <Link href={`/category/${props.item.slug}`}>
                     <a>
                         <div className={styles.contentItem__containerInfo}>
-                            <img src='https://aristokratrest.com/files/aristokratrest/image/no_product.jpg' alt='play'/>
+                            <img src='https://aristokratrest.com/files/aristokratrest/image/no_product.jpg'
+                                   height="50"
+                                   width="50"
+                                   alt='play'/>
                             <p>{props.item.name}</p>
                         </div>
                     </a>

@@ -1,6 +1,8 @@
 import {useSelector, useDispatch} from 'react-redux'
 import { fetchpostsThree } from '../../../store/actions/postActions';
 import ContentItem from '../ContentItem/ContentItem';
+import Image from "next/image";
+import Image1 from '../../../public/img/down.png';
 import styles from '../../../styles/Content.module.css';
 
 export default function Content() {
@@ -52,7 +54,11 @@ export default function Content() {
         <div className={styles.content}>
             <div className={styles.content__container}>
                 <div className={!flagLoad ? styles.content__containerLoading__false : styles.content__containerLoading}>
-                    <img src='img/down.png' className={styles.load__img} alt="logo"/>
+                    <Image src={Image1}
+                           height="50"
+                           width="50"
+                           className={styles.load__img}
+                           alt="logo"/>
                 </div>
                 {arrayCategoryId && arrayCategoryId.map(item =>
                     <div

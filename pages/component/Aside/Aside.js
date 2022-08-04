@@ -6,9 +6,9 @@ import {fetchposts, fetchpostsTwo, fetchpostsSix} from '../../../store/actions/p
 import Link from "next/link";
 import styles from '../../../styles/Aside.module.css';
 
-const Aside = ({users}) => {
-    const  arrayGeneralCategories  = useSelector((state) => state.post.arrayGeneralCategories[0]);
-    const {posts} = useSelector(state => state.post);
+const Aside = (props) => {
+    // const  arrayGeneralCategories  = useSelector((state) => state.post.arrayGeneralCategories[0]);
+    // const {posts} = useSelector(state => state.post);
 
     const dispatch = useDispatch();
 
@@ -19,11 +19,10 @@ const Aside = ({users}) => {
     }, [])
 
     return (
-        <>
             <aside className={styles.aside}>
                 <div className={styles.aside__container}>
                     <ul className={styles.aside__container__ulList}>
-                        {arrayGeneralCategories && arrayGeneralCategories.map(item =>
+                        {props.items.categories.map(item =>
                             <li
                                 className={styles.ulList__element}
                                 key={item.id}
@@ -34,18 +33,8 @@ const Aside = ({users}) => {
                     </ul>
                 </div>
             </aside>
-        </>
     );
 }
 
 export default Aside;
 
-export async function getStaticProps(context) {
-    const baseUrl = `https://bion.biz-mark.ru/api/v1/general`;
-    const response = await fetch(`${baseUrl}/categories`)
-    const users = await response.json()
-    console.log('asdasdasdasd3333333', users);
-    return {
-        props: {users}, // will be passed to the page component as props
-    }
-}

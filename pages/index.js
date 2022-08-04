@@ -9,7 +9,8 @@ import styles from '../styles/Home.module.css'
 import Link from "next/link";
 
 
-export default function Home() {
+export default function Home({array, arrayTwo}) {
+console.log(arrayTwo);
 
     const [auth, setAuth] = useState(() => {
         return {
@@ -22,8 +23,9 @@ export default function Home() {
 
     const dispatch = useDispatch();
 
-    const refreshCardId = (baseUrl,idCard, token) => {
-        fetch(`${baseUrl}?shop_id=${idCard}`, {
+    const  refreshToken = (token) => {
+        const baseUrlTwo = `https://bion.biz-mark.ru`;
+        fetch(`${baseUrlTwo}/api/v1/auth/refresh`, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -47,7 +49,7 @@ export default function Home() {
         let idCard = '';
 
         fetch(baseUrl, {
-            method: 'GET',
+            method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
@@ -65,13 +67,13 @@ export default function Home() {
                         auth: true
                     }
                 })
-                if ( idCard !== null) {
-                    refreshCardId(baseUrl, idCard, token)
-                }
                 }
             )
             .catch((error) => {
                 console.error('Error:', error);
+                if ( token !== null) {
+                    refreshToken(token);
+                }
             });
         dispatch(fetchposts());
     }, [])
@@ -104,7 +106,7 @@ export default function Home() {
                 {/*    Welcome to <a href="https://nextjs.org">Next.js!</a>*/}
                 {/*</h1>*/}
                 <Filter/>
-                <Main/>
+                <Main items ={array.data}/>
             </main>
 
             {/*<footer className={styles.footer}>*/}
@@ -112,11 +114,12 @@ export default function Home() {
         </div>
     )
 }
-// export async function getServerSideProps({params}) {
-//     const baseUrl = `https://bion.biz-mark.ru/api/v1/general/wishlist`;
-//     const response = await fetch(baseUrl);
-//     const userWishList = await response.json();
-//     return {
-//         props: {userWishList}, // will be passed to the page component as props
-//     }
-// }
+export async function getServerSideProps({params}) {
+    const baseUrl = `https://bion.biz-mark.ru/api/v1/general`;
+    const response = await fetch(`${baseUrl}/categories`);
+    const array = await response.json();
+
+    return {
+        props: {array} // will be passed to the page component as props
+    }
+}
