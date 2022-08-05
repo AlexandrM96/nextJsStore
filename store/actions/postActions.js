@@ -92,6 +92,7 @@ export const fetchpostsThree = (id, page, search, minPriсe, maxPriсe) => async
     })
         .then((response) => response.json())
         .then((data) => {
+            console.log('dataaaaa', data)
                 dispatch({
                     type: types.API_REQUEST_CATEGORY_ADD_ITEMS,
                     payload: {

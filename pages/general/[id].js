@@ -1,19 +1,21 @@
 import {useSelector, useDispatch} from 'react-redux'
-import {fetchpostsThree} from '../../../store/actions/postActions';
-import ContentItem from '../ContentItem/ContentItem';
+//
+import ContentItem from '../component/ContentItem/ContentItem';
 import Image from "next/image";
-import Image1 from '../../../public/img/down.png';
-import styles from '../../../styles/Content.module.css';
+import Image1 from '../../public/img/down.png';
+import styles from '../../styles/Content.module.css';
 import Link from "next/link";
 import React from "react";
 
-export default function Content() {
-
-    const dispatch = useDispatch();
-
-    const arrayCategoryId = useSelector((state) => state.post.arrayCategoryId[0]);
-
-    const maxPagesPagination = useSelector((state) => state.post.maxPagesPagination);
+export default function Content({item, urlPage}) {
+    console.log(item.data, urlPage.split('=').pop())
+const newUrl = urlPage.split('=').pop();
+    let countPagination = 0;
+    const maxPagesPagination = [];
+    for (let i = 0; i < item.data.pagination.max_pages; i++) {
+        countPagination++;
+        maxPagesPagination.push(countPagination);
+    }
 
     const categoryId = useSelector((state) => state.post.categoryId);
 
@@ -52,10 +54,8 @@ export default function Content() {
         pagNum = 1;
     }
 
-    console.log('aaaaaadddddddddasddd', arrayCategoryId);
-
     return (
-        <div className={styles.content}>
+        <div>
             <div className={styles.content__container}>
                 <div className={!flagLoad ? styles.content__containerLoading__false : styles.content__containerLoading}>
                     <Image src={Image1}
@@ -64,7 +64,7 @@ export default function Content() {
                            className={styles.load__img}
                            alt="logo"/>
                 </div>
-                {arrayCategoryId && arrayCategoryId.map(item =>
+                {item.data.products.map(item =>
                     <div
                         className={styles.content__containerList}
                         key={item.id}
@@ -88,7 +88,7 @@ export default function Content() {
                         className={pagNum === page ? styles.content__pagesCount__true : styles.content__pagesCount}
                         onClick={(e) => dispatch(fetchpostsThree(+categoryId, page, search, minPriсe, maxPriсe))}
                     >
-                        <Link href={`general/products?page=${page}&category=${categoryId}`}>
+                        <Link href={`general/products?page=${page}&category=${newUrl}`}>
                             <a>
                                 {page}
                             </a>
@@ -104,8 +104,18 @@ export default function Content() {
                     </button>
                 </div>
             </div>
+            asdadsasdas
         </div>
     );
 }
 
+export async function getServerSideProps({req}) {
+    const urlPage = req.url;
+    const baseUrl = `https://bion.biz-mark.ru/api/v1`;
+    const response = await fetch(`${baseUrl}${urlPage}`)
+    const item = await response.json()
 
+    return {
+        props: {item, urlPage},
+    }
+}

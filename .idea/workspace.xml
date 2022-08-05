@@ -2,12 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="94866967-e93c-4119-a144-7483b0d40e87" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/pages/general/[id].js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/component/Aside/Aside.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/component/Aside/Aside.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/component/Content/Content.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/component/Content/Content.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/component/ContentItem/ContentItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/component/ContentItem/ContentItem.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/component/Main/Main.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/component/Main/Main.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/actions/postActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/store/actions/postActions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/globals.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles/globals.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,7 +38,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../testNextStore" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/pages" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="yarn" />
@@ -47,6 +46,10 @@
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Biz-Mark\Desktop\dev\nextJsStore\pages" />
+      <recent name="C:\Users\Biz-Mark\Desktop\dev\nextJsStore\pages\component\Content" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\Biz-Mark\Desktop\dev\nextJsStore\pages\category" />
       <recent name="C:\Users\Biz-Mark\Desktop\dev\nextJsStore\pages" />
@@ -72,7 +75,8 @@
       <workItem from="1659337219651" duration="25375000" />
       <workItem from="1659423696546" duration="27377000" />
       <workItem from="1659510055271" duration="22963000" />
-      <workItem from="1659596354671" duration="12956000" />
+      <workItem from="1659596354671" duration="14127000" />
+      <workItem from="1659682781568" duration="8058000" />
     </task>
     <servers />
   </component>
