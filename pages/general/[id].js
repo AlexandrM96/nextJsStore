@@ -1,5 +1,4 @@
 import {useSelector, useDispatch} from 'react-redux'
-//
 import ContentItem from '../component/ContentItem/ContentItem';
 import Image from "next/image";
 import Image1 from '../../public/img/down.png';
@@ -7,9 +6,23 @@ import styles from '../../styles/Content.module.css';
 import Link from "next/link";
 import React from "react";
 
+
 export default function Content({item, urlPage}) {
-    console.log(item.data, urlPage.split('=').pop())
-const newUrl = urlPage.split('=').pop();
+
+    console.log(item, urlPage.split('='), urlPage.split('=')[1][0]);
+
+    const newUrl = urlPage.split('=').pop();
+
+    let proc = [];
+
+    for (let i = 0; i < urlPage.split('=')[1].length; i++) {
+        if (parseInt(urlPage.split('=')[1][i])) {
+            proc.push(urlPage.split('=')[1][i]);
+        }
+    }
+
+    const urlPagNum = proc.join('');
+
     let countPagination = 0;
     const maxPagesPagination = [];
     for (let i = 0; i < item.data.pagination.max_pages; i++) {
@@ -30,26 +43,27 @@ const newUrl = urlPage.split('=').pop();
     let pagNum = useSelector((state) => state.post.pagNum);
 
     let page = [...maxPagesPagination];
+    console.log(page)
 
     let newPage = [];
 
-    if (pagNum === (page.length - 1)) {
-        for (let i = pagNum; i < (pagNum + 2); i++) {
+    if (+urlPagNum === (page.length - 1)) {
+        for (let i = +urlPagNum; i < (+urlPagNum + 2); i++) {
             newPage.push(i);
         }
     } else if (pagNum === page.length) {
-        for (let i = pagNum; i < (pagNum + 1); i++) {
+        for (let i = +urlPagNum; i < (+urlPagNum + 1); i++) {
             newPage.push(i);
         }
     } else {
-        for (let i = pagNum; i < (pagNum + 3); i++) {
+        for (let i = +urlPagNum; i < (+urlPagNum + 3); i++) {
             newPage.push(i);
         }
     }
 
-    pagNum === 1 ? page = [...newPage] : page = [pagNum - 1, ...newPage]
+    +urlPagNum === 1 ? page = [...newPage] : page = [+urlPagNum - 1, ...newPage]
 
-    if (pagNum === undefined) {
+    if (+urlPagNum === undefined) {
         page = [1, 2, 3, 4];
         pagNum = 1;
     }
@@ -75,36 +89,43 @@ const newUrl = urlPage.split('=').pop();
             </div>
             <div className={styles.content__pages}>
                 <div>
-                    <button
-                        className={pagNum >= page.length ? styles.content__pagesButton : styles.content__pagesButton__none}
-                        onClick={(e) => dispatch(fetchpostsThree(+categoryId, 1, search, minPriсe, maxPriсe))}
-                    >
-                        В начало
-                    </button>
+                    <Link href={`products?page=1&category=${newUrl}`}>
+                        <a>
+                            <button
+                                className={+urlPagNum >= page.length ? styles.content__pagesButton : styles.content__pagesButton__none}
+                                // onClick={(e) => dispatch(fetchpostsThree(+categoryId, 1, search, minPriсe, maxPriсe))}
+                            >
+                                В начало
+                            </button>
+                        </a>
+                    </Link>
                 </div>
                 {page.map((page, index) =>
-                    <div
-                        key={index}
-                        className={pagNum === page ? styles.content__pagesCount__true : styles.content__pagesCount}
-                        onClick={(e) => dispatch(fetchpostsThree(+categoryId, page, search, minPriсe, maxPriсe))}
-                    >
-                        <Link href={`general/products?page=${page}&category=${newUrl}`}>
-                            <a>
+                    <Link href={`products?page=${page}&category=${newUrl}`}>
+                        <a>
+                            <div
+                                key={index}
+                                className={+urlPagNum === +page ? styles.content__pagesCount__true : styles.content__pagesCount}
+                                // onClick={(e) => dispatch(fetchpostsThree(+categoryId, page, search, minPriсe, maxPriсe))}
+                            >
                                 {page}
-                            </a>
-                        </Link>
-                    </div>
+                            </div>
+                        </a>
+                    </Link>
                 )}
                 <div>
-                    <button
-                        className={pagNum <= maxPagesPagination.length - 3 ? styles.content__pagesButton : styles.content__pagesButton__none}
-                        onClick={(e) => dispatch(fetchpostsThree(+categoryId, maxPagesPagination[maxPagesPagination.length - 1], search, minPriсe, maxPriсe))}
-                    >
-                        В конец
-                    </button>
+                    <Link href={`products?page=${maxPagesPagination.length - 1}&category=${newUrl}`}>
+                        <a>
+                            <button
+                                className={+urlPagNum <= maxPagesPagination.length - 3 ? styles.content__pagesButton : styles.content__pagesButton__none}
+                                // onClick={(e) => dispatch(fetchpostsThree(+categoryId, maxPagesPagination[maxPagesPagination.length - 1], search, minPriсe, maxPriсe))}
+                            >
+                                В конец
+                            </button>
+                        </a>
+                    </Link>
                 </div>
             </div>
-            asdadsasdas
         </div>
     );
 }
