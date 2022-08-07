@@ -5,12 +5,12 @@ import {useDispatch, useSelector} from 'react-redux';
 import {fetchposts} from '../store/actions/postActions';
 import Main from './component/Main/Main';
 import Filter from './component/Filter/Filter'
-import styles from '../styles/Home.module.css'
 import Link from "next/link";
-
+import MainContainer from "./component/MainContainer/MainContainer";
+import styles from '../styles/Home.module.css'
 
 export default function Home({array, arrayTwo}) {
-console.log(arrayTwo);
+    console.log(arrayTwo);
 
     const [auth, setAuth] = useState(() => {
         return {
@@ -23,7 +23,7 @@ console.log(arrayTwo);
 
     const dispatch = useDispatch();
 
-    const  refreshToken = (token) => {
+    const refreshToken = (token) => {
         const baseUrlTwo = `https://bion.biz-mark.ru`;
         fetch(`${baseUrlTwo}/api/v1/auth/refresh`, {
             method: 'POST',
@@ -58,20 +58,20 @@ console.log(arrayTwo);
         })
             .then((response) => response.json())
             .then((data) => {
-                idCard = localStorage.getItem('cardUserId');
-                console.log(idCard)
-                setAuth(prev => {
-                    return {
-                        ...prev,
-                        userName: data.data.name,
-                        auth: true
-                    }
-                })
+                    idCard = localStorage.getItem('cardUserId');
+                    console.log(idCard)
+                    setAuth(prev => {
+                        return {
+                            ...prev,
+                            userName: data.data.name,
+                            auth: true
+                        }
+                    })
                 }
             )
             .catch((error) => {
                 console.error('Error:', error);
-                if ( token !== null) {
+                if (token !== null) {
                     refreshToken(token);
                 }
             });
@@ -86,34 +86,36 @@ console.log(arrayTwo);
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
             <header>
-                <Link href={`/account/login`}>
-                    <a className={styles.filter__wordButton}>Вход</a>
-                </Link>
-                /
-                <Link href={`/account/register`}>
-                    <a className={styles.filter__wordButton}>Регистрация</a>
-                </Link>
-                {/*<button>корзина</button>*/}
-                <div>
-                    ____________________________________________________________
-                </div>
-                <p>
-                    {auth.auth ? auth.userName : 'Авторизуйтесь!'}
-                </p>
+                {/*<Link href={`/account/login`}>*/}
+                {/*    <a className={styles.filter__wordButton}>Вход</a>*/}
+                {/*</Link>*/}
+                {/*/*/}
+                {/*<Link href={`/account/register`}>*/}
+                {/*    <a className={styles.filter__wordButton}>Регистрация</a>*/}
+                {/*</Link>*/}
+                {/*/!*<button>корзина</button>*!/*/}
+                {/*<div>*/}
+                {/*    ____________________________________________________________*/}
+                {/*</div>*/}
+                {/*<p>*/}
+                {/*    {auth.auth ? auth.userName : 'Авторизуйтесь!'}*/}
+                {/*</p>*/}
             </header>
-            <main className={styles.main}>
-                {/*<h1 className={styles.title}>*/}
-                {/*    Welcome to <a href="https://nextjs.org">Next.js!</a>*/}
-                {/*</h1>*/}
-                <Filter/>
-                <Main items ={array.data}/>
-            </main>
-
+            <MainContainer items={array.data}>
+                <main className={styles.main}>
+                    {/*<h1 className={styles.title}>*/}
+                    {/*    Welcome to <a href="https://nextjs.org">Next.js!</a>*/}
+                    {/*</h1>*/}
+                    {/*<Filter/>*/}
+                    <Main items={array.data}/>
+                </main>
+            </MainContainer>
             {/*<footer className={styles.footer}>*/}
             {/*</footer>*/}
         </div>
     )
 }
+
 export async function getServerSideProps({params}) {
     const baseUrl = `https://bion.biz-mark.ru/api/v1/general`;
     const response = await fetch(`${baseUrl}/categories`);

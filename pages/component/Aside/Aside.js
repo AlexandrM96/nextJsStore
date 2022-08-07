@@ -9,7 +9,7 @@ import styles from '../../../styles/Aside.module.css';
 const Aside = (props) => {
     // const  arrayGeneralCategories  = useSelector((state) => state.post.arrayGeneralCategories[0]);
     // const {posts} = useSelector(state => state.post);
-
+console.log(props.items)
     const dispatch = useDispatch();
 
     useEffect(() => {

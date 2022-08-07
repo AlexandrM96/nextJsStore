@@ -1,8 +1,9 @@
-import {useRouter} from "next/router";
-import styles from "../../styles/Item.module.css";
 import React, {useState} from "react";
+import {useRouter} from "next/router";
+import MainContainer from "../component/MainContainer/MainContainer";
+import styles from "../../styles/Item.module.css";
 
-export default function Item({item}) {
+export default function Item({item, array}) {
     const {query} = useRouter();
     console.log(query, item)
 
@@ -92,49 +93,58 @@ export default function Item({item}) {
     };
 
     return (
-        <div>
-            <h1>{item.data.name}</h1>
-            <div className={styles.item__infoContainer}>
-                <img src='https://aristokratrest.com/files/aristokratrest/image/no_product.jpg' alt='play'/>
-                <ul>
-                    <li>Price: <span className={styles.item__infoContainer__span}>{item.data.offers[0].price} ₽ </span>
-                    </li>
-                    <li>Bonuses: <span className={styles.item__infoContainer__span}>{item.data.offers[0].bonuses}</span>
-                    </li>
-                    <li>Code: <span className={styles.item__infoContainer__span}>{item.data.offers[0].code}</span></li>
-                    <li>Height: <span className={styles.item__infoContainer__span}>{item.data.offers[0].height}</span>
-                    </li>
-                    <li>Quantity: <span
-                        className={styles.item__infoContainer__span}>{item.data.offers[0].quantity}</span></li>
-                    <li>Volume: <span className={styles.item__infoContainer__span}>{item.data.offers[0].volume}</span>
-                    </li>
-                    <li>Weight: <span className={styles.item__infoContainer__span}>{item.data.offers[0].weight}</span>
-                    </li>
-                    <li>Width: <span className={styles.item__infoContainer__span}>{item.data.offers[0].width}</span>
-                    </li>
-                    <li>Description: <span className={styles.item__infoContainer__span}>{item.data.description}</span>
-                    </li>
-                </ul>
-            </div>
-            <div className={styles.itemContainer__itemButtons}>
-                <div className={styles.listItemCard__itemButtons}>
-                    <button onClick={handleClick}>+</button>
-                    <div>
-                        {state.displayNum}
+        <MainContainer items={array.data}>
+            <div>
+                <h1>{item.data.name}</h1>
+                <div className={styles.item__infoContainer}>
+                    <img src='https://aristokratrest.com/files/aristokratrest/image/no_product.jpg' alt='play'/>
+                    <ul>
+                        <li>Price: <span
+                            className={styles.item__infoContainer__span}>{item.data.offers[0].price} ₽ </span>
+                        </li>
+                        <li>Bonuses: <span
+                            className={styles.item__infoContainer__span}>{item.data.offers[0].bonuses}</span>
+                        </li>
+                        <li>Code: <span className={styles.item__infoContainer__span}>{item.data.offers[0].code}</span>
+                        </li>
+                        <li>Height: <span
+                            className={styles.item__infoContainer__span}>{item.data.offers[0].height}</span>
+                        </li>
+                        <li>Quantity: <span
+                            className={styles.item__infoContainer__span}>{item.data.offers[0].quantity}</span></li>
+                        <li>Volume: <span
+                            className={styles.item__infoContainer__span}>{item.data.offers[0].volume}</span>
+                        </li>
+                        <li>Weight: <span
+                            className={styles.item__infoContainer__span}>{item.data.offers[0].weight}</span>
+                        </li>
+                        <li>Width: <span className={styles.item__infoContainer__span}>{item.data.offers[0].width}</span>
+                        </li>
+                        <li>Description: <span
+                            className={styles.item__infoContainer__span}>{item.data.description}</span>
+                        </li>
+                    </ul>
+                </div>
+                <div className={styles.itemContainer__itemButtons}>
+                    <div className={styles.listItemCard__itemButtons}>
+                        <button onClick={handleClick}>+</button>
+                        <div>
+                            {state.displayNum}
+                        </div>
+                        <button onClick={handleClick}>-</button>
                     </div>
-                    <button onClick={handleClick}>-</button>
-                </div>
-                <div className={styles.contentItem__containerPriseAndCartButton}>
-                    <button onClick={clickAddToCard} className={styles.priseAndCartButton__button}>
-                        {state.flag === false ?
-                            <span>В корзину</span>
-                            :
-                            <img src='img/down.png' className={styles.load__img} alt="logo"/>
-                        }
-                    </button>
+                    <div className={styles.contentItem__containerPriseAndCartButton}>
+                        <button onClick={clickAddToCard} className={styles.priseAndCartButton__button}>
+                            {state.flag === false ?
+                                <span>В корзину</span>
+                                :
+                                <img src='img/down.png' className={styles.load__img} alt="logo"/>
+                            }
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
+        </MainContainer>
     )
 };
 
@@ -142,7 +152,10 @@ export async function getServerSideProps({params}) {
     const baseUrl = `https://bion.biz-mark.ru/api/v1/general`;
     const response = await fetch(`${baseUrl}/products/${params.id}`)
     const item = await response.json()
+    const baseUrlTwo = `https://bion.biz-mark.ru/api/v1/general`;
+    const responseTwo = await fetch(`${baseUrlTwo}/categories`);
+    const array = await responseTwo.json();
     return {
-        props: {item}, // will be passed to the page component as props
+        props: {item, array}, // will be passed to the page component as props
     }
 }

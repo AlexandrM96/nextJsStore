@@ -7,8 +7,8 @@ export default function Main(props) {
     return (
         <main className="main">
             <section className={styles.main__container}>
-                <Aside items={props.items}/>
-                <Content/>
+                {/*<Aside items={props.items}/>*/}
+                {/*<Content/>*/}
             </section>
         </main>
     );

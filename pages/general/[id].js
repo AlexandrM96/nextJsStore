@@ -1,5 +1,6 @@
 import {useSelector, useDispatch} from 'react-redux'
 import ContentItem from '../component/ContentItem/ContentItem';
+import MainContainer from "../component/MainContainer/MainContainer";
 import Image from "next/image";
 import Image1 from '../../public/img/down.png';
 import styles from '../../styles/Content.module.css';
@@ -7,7 +8,7 @@ import Link from "next/link";
 import React from "react";
 
 
-export default function Content({item, urlPage}) {
+export default function Content({item, urlPage, array}) {
 
     console.log(item, urlPage.split('='), urlPage.split('=')[1][0]);
 
@@ -24,7 +25,9 @@ export default function Content({item, urlPage}) {
     const urlPagNum = proc.join('');
 
     let countPagination = 0;
+
     const maxPagesPagination = [];
+
     for (let i = 0; i < item.data.pagination.max_pages; i++) {
         countPagination++;
         maxPagesPagination.push(countPagination);
@@ -69,64 +72,67 @@ export default function Content({item, urlPage}) {
     }
 
     return (
-        <div>
-            <div className={styles.content__container}>
-                <div className={!flagLoad ? styles.content__containerLoading__false : styles.content__containerLoading}>
-                    <Image src={Image1}
-                           height="50"
-                           width="50"
-                           className={styles.load__img}
-                           alt="logo"/>
-                </div>
-                {item.data.products.map(item =>
+        <MainContainer items={array.data}>
+            <div>
+                <div className={styles.content__container}>
                     <div
-                        className={styles.content__containerList}
-                        key={item.id}
-                    >
-                        <ContentItem item={item}/>
+                        className={!flagLoad ? styles.content__containerLoading__false : styles.content__containerLoading}>
+                        <Image src={Image1}
+                               height="50"
+                               width="50"
+                               className={styles.load__img}
+                               alt="logo"/>
                     </div>
-                )}
-            </div>
-            <div className={styles.content__pages}>
-                <div>
-                    <Link href={`products?page=1&category=${newUrl}`}>
-                        <a>
-                            <button
-                                className={+urlPagNum >= page.length ? styles.content__pagesButton : styles.content__pagesButton__none}
-                                // onClick={(e) => dispatch(fetchpostsThree(+categoryId, 1, search, minPriсe, maxPriсe))}
-                            >
-                                В начало
-                            </button>
-                        </a>
-                    </Link>
+                    {item.data.products.map(item =>
+                        <div
+                            className={styles.content__containerList}
+                            key={item.id}
+                        >
+                            <ContentItem item={item}/>
+                        </div>
+                    )}
                 </div>
-                {page.map((page, index) =>
-                    <Link href={`products?page=${page}&category=${newUrl}`}>
-                        <a>
-                            <div
-                                key={index}
-                                className={+urlPagNum === +page ? styles.content__pagesCount__true : styles.content__pagesCount}
-                                // onClick={(e) => dispatch(fetchpostsThree(+categoryId, page, search, minPriсe, maxPriсe))}
-                            >
-                                {page}
-                            </div>
-                        </a>
-                    </Link>
-                )}
-                <div>
-                    <Link href={`products?page=${maxPagesPagination.length - 1}&category=${newUrl}`}>
-                        <a>
-                            <button
-                                className={+urlPagNum <= maxPagesPagination.length - 3 ? styles.content__pagesButton : styles.content__pagesButton__none}
-                                // onClick={(e) => dispatch(fetchpostsThree(+categoryId, maxPagesPagination[maxPagesPagination.length - 1], search, minPriсe, maxPriсe))}
-                            >
-                                В конец
-                            </button>
-                        </a>
-                    </Link>
+                <div className={styles.content__pages}>
+                    <div>
+                        <Link href={`products?page=1&category=${newUrl}`}>
+                            <a>
+                                <button
+                                    className={+urlPagNum >= page.length ? styles.content__pagesButton : styles.content__pagesButton__none}
+                                    // onClick={(e) => dispatch(fetchpostsThree(+categoryId, 1, search, minPriсe, maxPriсe))}
+                                >
+                                    В начало
+                                </button>
+                            </a>
+                        </Link>
+                    </div>
+                    {page.map((page, index) =>
+                        <Link href={`products?page=${page}&category=${newUrl}`}>
+                            <a>
+                                <div
+                                    key={index}
+                                    className={+urlPagNum === +page ? styles.content__pagesCount__true : styles.content__pagesCount}
+                                    // onClick={(e) => dispatch(fetchpostsThree(+categoryId, page, search, minPriсe, maxPriсe))}
+                                >
+                                    {page}
+                                </div>
+                            </a>
+                        </Link>
+                    )}
+                    <div>
+                        <Link href={`products?page=${maxPagesPagination.length - 1}&category=${newUrl}`}>
+                            <a>
+                                <button
+                                    className={+urlPagNum <= maxPagesPagination.length - 3 ? styles.content__pagesButton : styles.content__pagesButton__none}
+                                    // onClick={(e) => dispatch(fetchpostsThree(+categoryId, maxPagesPagination[maxPagesPagination.length - 1], search, minPriсe, maxPriсe))}
+                                >
+                                    В конец
+                                </button>
+                            </a>
+                        </Link>
+                    </div>
                 </div>
             </div>
-        </div>
+        </MainContainer>
     );
 }
 
@@ -135,8 +141,10 @@ export async function getServerSideProps({req}) {
     const baseUrl = `https://bion.biz-mark.ru/api/v1`;
     const response = await fetch(`${baseUrl}${urlPage}`)
     const item = await response.json()
-
+    const baseUrlTwo = `https://bion.biz-mark.ru/api/v1/general`;
+    const responseTwo = await fetch(`${baseUrlTwo}/categories`);
+    const array = await responseTwo.json();
     return {
-        props: {item, urlPage},
+        props: {item, urlPage, array},
     }
 }

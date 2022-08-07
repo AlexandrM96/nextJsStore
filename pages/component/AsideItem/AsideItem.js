@@ -15,6 +15,8 @@ import styles from '../../../styles/AsideItem.module.css';
 
 export default function AsideItem(props) {
 
+    console.log(props);
+
     const arrayCategories = useSelector((state) => state.post.arrayCategories[0]);
 
     const minPrise = useSelector((state) => state.post.minPrice);

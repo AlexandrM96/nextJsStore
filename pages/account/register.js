@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
 import {useRouter} from "next/router";
 import validator from 'validator';
+import MainContainer from "../component/MainContainer/MainContainer";
 import styles from '../../styles/Registration.module.css';
 
-export default function Register({userWishList}) {
+export default function Register({userWishList, array}) {
 
     const {query} = useRouter()
 
@@ -72,6 +73,7 @@ export default function Register({userWishList}) {
     }
 
     return (
+        <MainContainer items={array.data}>
         <div className={styles.registration}>
             <h2 className={styles.registration__title}>Registration</h2>
             <form className={styles.registration__form} onSubmit={submitChackin}>
@@ -137,6 +139,7 @@ export default function Register({userWishList}) {
                        type="submit"/>
             </form>
         </div>
+            </MainContainer>
     )
 };
 
@@ -144,7 +147,11 @@ export async function getServerSideProps({params}) {
     const baseUrl = `https://bion.biz-mark.ru/api/v1/general/wishlist`;
     const response = await fetch(baseUrl);
     const userWishList = await response.json();
+    const baseUrlTwo = `https://bion.biz-mark.ru/api/v1/general`;
+    const responseTwo = await fetch(`${baseUrlTwo}/categories`);
+    const array = await responseTwo.json();
+
     return {
-        props: {userWishList}, // will be passed to the page component as props
+        props: {userWishList, array}, // will be passed to the page component as props
     }
 }

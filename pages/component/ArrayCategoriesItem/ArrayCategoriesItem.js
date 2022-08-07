@@ -7,6 +7,8 @@ import {
     fetchpostsSeven
 } from '../../../store/actions/postActions';
 import styles from '../../../styles/ArrayCategoriesItem.module.css';
+import Link from "next/link";
+import React from "react";
 
 export default function ArrayCategoriesItem(props) {
 
@@ -15,6 +17,8 @@ export default function ArrayCategoriesItem(props) {
     const maxPriсe = useSelector((state) => state.post.maxPrice);
 
     const dispatch = useDispatch();
+
+    const id = props.item.id;
 
     const clickCategory = () => {
         const id = props.item.id;
@@ -28,7 +32,14 @@ export default function ArrayCategoriesItem(props) {
 
     return (
         <p onClick={clickCategory} className={styles.arrayCategoriesItem}>
-            {props.item.name}
+            <Link href={`general/products?page=${1}&category=${id}`}>
+                <a>
+                    {props.item.name}
+                </a>
+            </Link>
         </p>
+        // <p onClick={clickCategory} className={styles.arrayCategoriesItem}>
+        //     {props.item.name}
+        // </p>
     );
 }
