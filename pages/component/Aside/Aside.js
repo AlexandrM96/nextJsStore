@@ -1,5 +1,5 @@
 
-import {useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import AsideItem from '../AsideItem/AsideItem';
 import {fetchposts, fetchpostsTwo, fetchpostsSix} from '../../../store/actions/postActions';
@@ -23,12 +23,14 @@ console.log(props.items)
                 <div className={styles.aside__container}>
                     <ul className={styles.aside__container__ulList}>
                         {props.items.categories.map(item =>
+                            <Link href={`categories/${item.slug}`}>
                             <li
                                 className={styles.ulList__element}
                                 key={item.id}
                             >
                                 <AsideItem item={item} />
                             </li>
+                            </Link>
                         )}
                     </ul>
                 </div>

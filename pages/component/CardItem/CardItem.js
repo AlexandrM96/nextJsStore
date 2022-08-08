@@ -98,7 +98,7 @@ export default function CardItem(props) {
     };
 
     const clickRemoveItem = () => {
-        console.log('удалил')
+
         const idItemRemove = props.item.id;
 
         const baseUrl = `https://bion.biz-mark.ru/api/v1/general`;

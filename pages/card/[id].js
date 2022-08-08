@@ -1,7 +1,7 @@
 import {useRouter} from "next/router";
-import CardItem from "./component/CardItem/CardItem";
-import MainContainer from "./component/MainContainer/MainContainer";
-import styles from '../styles/Card.module.css';
+import CardItem from "../component/CardItem/CardItem";
+import MainContainer from "../component/MainContainer/MainContainer";
+import styles from '../../styles/Card.module.css';
 import Head from "next/head";
 import React from "react";
 

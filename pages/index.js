@@ -9,7 +9,7 @@ import Link from "next/link";
 import MainContainer from "./component/MainContainer/MainContainer";
 import styles from '../styles/Home.module.css'
 
-export default function Home({array, arrayTwo}) {
+export default function Home({baseUrl, array, arrayTwo}) {
     console.log(arrayTwo);
 
     const [auth, setAuth] = useState(() => {
@@ -101,7 +101,7 @@ export default function Home({array, arrayTwo}) {
                 {/*    {auth.auth ? auth.userName : 'Авторизуйтесь!'}*/}
                 {/*</p>*/}
             </header>
-            <MainContainer items={array.data}>
+            <MainContainer url={baseUrl} items={array.data}>
                 <main className={styles.main}>
                     {/*<h1 className={styles.title}>*/}
                     {/*    Welcome to <a href="https://nextjs.org">Next.js!</a>*/}
@@ -122,6 +122,6 @@ export async function getServerSideProps({params}) {
     const array = await response.json();
 
     return {
-        props: {array} // will be passed to the page component as props
+        props: {baseUrl,array} // will be passed to the page component as props
     }
 }

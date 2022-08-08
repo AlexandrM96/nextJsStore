@@ -2,6 +2,7 @@ import React, {useState} from 'react'
 import {useRouter} from "next/router";
 import validator from 'validator';
 import Link from "next/link";
+import Router from "next/router";
 import MainContainer from "../component/MainContainer/MainContainer";
 import styles from '../../styles/Login.module.css'
 
@@ -56,6 +57,7 @@ export default function Login({userWishList, array}) {
                             alert("Успешно!");
                             console.log(data);
                             localStorage.setItem('tokenAuth', data.data.token);
+                            Router.push("/");
                         } else {
                             alert(data.message);
                         }

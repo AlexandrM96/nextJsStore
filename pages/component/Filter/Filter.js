@@ -62,11 +62,16 @@ export default function Filter() {
                         placeholder="Поиск..."
                         onChange={changeInput}
                     />
-                    <button className={styles.filter__wordButton}
-                            onClick={() => (dispatch(fetchpostsEight(pagNum, categoryId, state.settingName, state.minPrice, state.maxPrice)))}
-                    >
-                        Поиск
-                    </button>
+                    <Link
+                        href={`general/products?search=${state.settingName}&filter[price][min]=${state.minPrice}&filter[price][max]=${state.maxPrice}`}>
+                        <a>
+                            <button className={styles.filter__wordButton}
+                                    onClick={() => (dispatch(fetchpostsEight(pagNum, categoryId, state.settingName, state.minPrice, state.maxPrice)))}
+                            >
+                                Поиск
+                            </button>
+                        </a>
+                    </Link>
                 </div>
                 <div className={styles.filter__containerPrice}>
                     <div className={styles.filter__price}>
@@ -96,17 +101,22 @@ export default function Filter() {
                         />
                     </div>
                 </div>
-                <button
-                    onClick={() => (dispatch(fetchpostsEight(pagNum, categoryId, state.settingName, state.minPrice, state.maxPrice)))}
-                    className={styles.filter__wordButton}>Применить
-                </button>
+                <Link
+                    href={`general/products?search=${state.settingName}&filter[price][min]=${state.minPrice}&filter[price][max]=${state.maxPrice}`}>
+                    <a>
+                        <button
+                            onClick={() => (dispatch(fetchpostsEight(pagNum, categoryId, state.settingName, state.minPrice, state.maxPrice)))}
+                            className={styles.filter__wordButton}>Применить
+                        </button>
+                    </a>
+                </Link>
                 <button
                     onClick={clickRemove}
                     className={styles.filter__wordButton}
                 >
                     Очистить
                 </button>
-                <Link href={`/card`}>
+                <Link href={`/card/27`}>
                     <a className={styles.filter__wordButton}>Корзина</a>
                 </Link>
                 <Link href={`/spisok-pokupok`}>

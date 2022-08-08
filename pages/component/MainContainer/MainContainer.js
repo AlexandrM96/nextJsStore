@@ -7,9 +7,9 @@ import {useDispatch, useSelector} from "react-redux";
 import {fetchposts} from "../../../store/actions/postActions";
 import Aside from "../Aside/Aside";
 
-export default function MainContainer ({ items, children, keywords}) {
+export default function MainContainer ({url, items, children, keywords}) {
 
-    console.log('122222222222222222222222aaaaaaaaaaaaaaaaaa', items)
+    // console.log('urlurlurlurlurlurlurlurlurl',url.split('/'));
 
     const [auth, setAuth] = useState(() => {
         return {
@@ -84,6 +84,10 @@ export default function MainContainer ({ items, children, keywords}) {
                 <title>Главная страница</title>
             </Head>
             <div className="navbar">
+                <Link href={`/`}>
+                    <a className={styles.filter__wordButton}>Главная</a>
+                </Link>
+                /
                 <Link href={`/account/login`}>
                     <a className={styles.filter__wordButton}>Вход</a>
                 </Link>
@@ -117,4 +121,3 @@ export default function MainContainer ({ items, children, keywords}) {
     );
 };
 
-// export default MainContainer;

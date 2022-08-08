@@ -150,8 +150,8 @@ export default function Item({item, array}) {
 
 export async function getServerSideProps({params}) {
     const baseUrl = `https://bion.biz-mark.ru/api/v1/general`;
-    const response = await fetch(`${baseUrl}/products/${params.id}`)
-    const item = await response.json()
+    const response = await fetch(`${baseUrl}/products/${params.id}`);
+    const item = await response.json();
     const baseUrlTwo = `https://bion.biz-mark.ru/api/v1/general`;
     const responseTwo = await fetch(`${baseUrlTwo}/categories`);
     const array = await responseTwo.json();

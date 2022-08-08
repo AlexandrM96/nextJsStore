@@ -12,6 +12,7 @@ import {
     fetchpostsSix
 } from '../../../store/actions/postActions';
 import styles from '../../../styles/AsideItem.module.css';
+import Link from "next/link";
 
 export default function AsideItem(props) {
 
@@ -68,10 +69,10 @@ export default function AsideItem(props) {
 
             <ul className={state.status === true ? styles.asideItem__elementList : styles.asideItem__elementList__none}>
                 {arrayCategories && arrayCategories.map(item =>
-                    <li
-                        key={item.id}>
-                        <ArrayCategoriesItem item={item}/>
-                    </li>
+                        <li
+                            key={item.id}>
+                            <ArrayCategoriesItem item={item}/>
+                        </li>
                 )}
             </ul>
         </div>

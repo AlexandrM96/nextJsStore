@@ -10,7 +10,7 @@ import React from "react";
 
 export default function Content({item, urlPage, array}) {
 
-    console.log(item, urlPage.split('='), urlPage.split('=')[1][0]);
+    console.log(item, urlPage, urlPage.split('='), urlPage.split('=')[1][0]);
 
     const newUrl = urlPage.split('=').pop();
 
@@ -54,7 +54,7 @@ export default function Content({item, urlPage, array}) {
         for (let i = +urlPagNum; i < (+urlPagNum + 2); i++) {
             newPage.push(i);
         }
-    } else if (pagNum === page.length) {
+    } else if (+urlPagNum === page.length) {
         for (let i = +urlPagNum; i < (+urlPagNum + 1); i++) {
             newPage.push(i);
         }
@@ -72,7 +72,7 @@ export default function Content({item, urlPage, array}) {
     }
 
     return (
-        <MainContainer items={array.data}>
+        <MainContainer url={urlPage} items={array.data}>
             <div>
                 <div className={styles.content__container}>
                     <div
@@ -119,7 +119,7 @@ export default function Content({item, urlPage, array}) {
                         </Link>
                     )}
                     <div>
-                        <Link href={`products?page=${maxPagesPagination.length - 1}&category=${newUrl}`}>
+                        <Link href={`products?page=${maxPagesPagination.length}&category=${newUrl}`}>
                             <a>
                                 <button
                                     className={+urlPagNum <= maxPagesPagination.length - 3 ? styles.content__pagesButton : styles.content__pagesButton__none}

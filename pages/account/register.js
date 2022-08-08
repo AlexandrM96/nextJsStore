@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {useRouter} from "next/router";
 import validator from 'validator';
+import Router from "next/router";
 import MainContainer from "../component/MainContainer/MainContainer";
 import styles from '../../styles/Registration.module.css';
 
@@ -36,8 +37,8 @@ export default function Register({userWishList, array}) {
             alert("You did not enter phone")
         } else if (register.password !== register.password2) {
             alert("Repeated password incorrectly")
-        } else if (!validator.isStrongPassword(register.password, {minSymbols: 0})) {
-            alert("Password must consist of one lowercase, uppercase letter and number, at least 8 characters")
+        // } else if (!validator.isStrongPassword(register.password, {minSymbols: 0})) {
+        //     alert("Password must consist of one lowercase, uppercase letter and number, at least 8 characters")
         } else {
             const name = register.username;
             const phone = register.phoneNumber;
@@ -63,6 +64,7 @@ export default function Register({userWishList, array}) {
                             alert("Успешно!");
                         } else {
                             alert(data.message);
+                            Router.push("account/login");
                         }
                     }
                 )
