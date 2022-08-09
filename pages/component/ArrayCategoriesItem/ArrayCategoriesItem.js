@@ -11,8 +11,10 @@ import Link from "next/link";
 import React from "react";
 
 export default function ArrayCategoriesItem(props) {
+    
 
-    console.log(props)
+    console.log(props.item)
+
     const minPriсe = useSelector((state) => state.post.minPrice);
 
     const maxPriсe = useSelector((state) => state.post.maxPrice);
@@ -33,10 +35,8 @@ export default function ArrayCategoriesItem(props) {
 
     return (
         <p onClick={clickCategory} className={styles.arrayCategoriesItem}>
-            <Link href={`general/products?category=${id}`} ref={'eeewqe'}>
-                <a>
+            <Link href={`/categories/[id]/[...slug]`} as={`/categories/${props.slug}/${props.item.slug}`} prefetch>
                     {props.item.name}
-                </a>
             </Link>
         </p>
         // <p onClick={clickCategory} className={styles.arrayCategoriesItem}>

@@ -23,12 +23,12 @@ console.log(props.items)
                 <div className={styles.aside__container}>
                     <ul className={styles.aside__container__ulList}>
                         {props.items.categories.map(item =>
-                            <Link href={`categories/${item.slug}`}>
+                            <Link href={`/categories/[id]`} as={`/categories/${item.slug}`} prefetch>
                             <li
                                 className={styles.ulList__element}
                                 key={item.id}
                             >
-                                <AsideItem item={item} />
+                                <AsideItem  item={item} />
                             </li>
                             </Link>
                         )}

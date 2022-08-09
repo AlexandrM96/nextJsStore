@@ -15,7 +15,6 @@ import styles from '../../../styles/AsideItem.module.css';
 import Link from "next/link";
 
 export default function AsideItem(props) {
-
     console.log(props);
 
     const arrayCategories = useSelector((state) => state.post.arrayCategories[0]);
@@ -71,7 +70,7 @@ export default function AsideItem(props) {
                 {arrayCategories && arrayCategories.map(item =>
                         <li
                             key={item.id}>
-                            <ArrayCategoriesItem item={item}/>
+                            <ArrayCategoriesItem slug={props.item.slug}  item={item}/>
                         </li>
                 )}
             </ul>

@@ -1,17 +1,33 @@
-import {useSelector, useDispatch} from 'react-redux'
-import ContentItem from '../component/ContentItem/ContentItem';
-import MainContainer from "../component/MainContainer/MainContainer";
-import Image from "next/image";
-import Image1 from '../../public/img/down.png';
-import styles from '../../styles/Content.module.css';
-import Link from "next/link";
+// import {useSelector, useDispatch} from 'react-redux'
+// import ContentItem from '../component/ContentItem/ContentItem';
+// import MainContainer from "../component/MainContainer/MainContainer";
+// import Image from "next/image";
+// import Image1 from '../../public/img/down.png';
+// import styles from '../../styles/Content.module.css';
+// import Link from "next/link";
 import React from "react";
+import styles from "../../styles/Content.module.css";
+import Image from "next/image";
+import Image1 from "../../public/img/down.png";
+import ContentItem from "../component/ContentItem/ContentItem";
+import Link from "next/link";
+import MainContainer from "../component/MainContainer/MainContainer";
+import NavigationCategoriesButtons from '../component/NavigationCategoriesButtons/NavigationCategoriesButtons';
+import {useSelector} from "react-redux";
 
 
-export default function Catalog({urlPage, arrayItems, arrayAside, productsCategoryId}) {
+export default function CatalogTwo({
+                                       urlPage,
+                                       arrayItems,
+                                       arrayAside,
+                                       productsCategoryId,
+                                       productsCategoryArray,
+                                       arrayNavigation
+                                   }) {
 
-console.log('nen', urlPage, arrayItems,arrayAside ,productsCategoryId)
+    console.log('nenenenenn', urlPage, arrayItems, arrayAside, productsCategoryId, productsCategoryArray, arrayNavigation)
 
+    const navigationCategoriesArray = arrayNavigation.data.categories;
     // console.log(arrayItems, urlPage, urlPage.split('='), urlPage.split('=')[1][0]);
 
     const newUrl = urlPage.split('=').pop();
@@ -75,8 +91,20 @@ console.log('nen', urlPage, arrayItems,arrayAside ,productsCategoryId)
 
     return (
         <MainContainer url={urlPage} items={arrayAside.data}>
-            <div>
-                <div className={styles.content__container}>
+            <div className={styles.content__container}>
+                <ul
+                    className={styles.content__container__navigationUl}
+                >
+                    {navigationCategoriesArray.map(item =>
+                        <li
+                            className={styles.content__container__navigationUl__li}
+                            key={item.index}
+                        >
+                            <NavigationCategoriesButtons url={urlPage} item={item}/>
+                        </li>
+                    )}
+                </ul>
+                <div>
                     <div
                         className={!flagLoad ? styles.content__containerLoading__false : styles.content__containerLoading}>
                         <Image src={Image1}
@@ -138,21 +166,30 @@ console.log('nen', urlPage, arrayItems,arrayAside ,productsCategoryId)
     );
 }
 
-export async function getServerSideProps({req,params}) {
-    //запрос для получения всех товаров по слагу
+export async function getServerSideProps({req, params}) {
+    //запрос для получения всех товаров по одной категории по слагу
     const urlPage = req.url;
-    console.log('rrrrrrrrrrrrrrrrrrrr',urlPage);
+    const newUrlPage = urlPage.split('/').pop();
     const baseUrl = `https://bion.biz-mark.ru/api/v1/general`;
-    const response = await fetch(`${baseUrl}${urlPage}`);
+    const response = await fetch(`${baseUrl}/categories/${newUrlPage}`);
     const item = await response.json();
     const productsCategoryId = item.data.id;
+    const productsCategoryArray = item.data;
     const responseTwo = await fetch(`${baseUrl}/products?category=${productsCategoryId}`);
     const arrayItems = await responseTwo.json();
-    // запрос для боковой панели
+    //запрос для получения товаров из категории внутри категории
+    const str = productsCategoryArray.children_id_list.join('|');
+    //сравнить по строке str
+    const responseFour = await fetch(`${baseUrl}/categories?categories=${str}`);
+    let arrayNavigation = await responseFour.json();
+    //запрос для боковой панели
     const baseUrlTwo = `https://bion.biz-mark.ru/api/v1/general`;
     const responseThree = await fetch(`${baseUrlTwo}/categories`);
     const arrayAside = await responseThree.json();
-    return {
-        props: {urlPage, arrayItems, arrayAside, productsCategoryId}
+    console.log('sadasdasdadsasdadsadsasdddcccccc',str, arrayNavigation)
+    if (productsCategoryArray.children_id_list !== []) {
+        return {
+            props: {urlPage, arrayItems, arrayAside, productsCategoryId, productsCategoryArray, arrayNavigation}
+        }
     }
 }
