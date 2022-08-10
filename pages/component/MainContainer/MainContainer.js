@@ -9,8 +9,6 @@ import Aside from "../Aside/Aside";
 
 export default function MainContainer ({url, items, children, keywords}) {
 
-    // console.log('urlurlurlurlurlurlurlurlurl',url.split('/'));
-
     const [auth, setAuth] = useState(() => {
         return {
             auth: false,
@@ -84,15 +82,15 @@ export default function MainContainer ({url, items, children, keywords}) {
                 <title>Главная страница</title>
             </Head>
             <div className="navbar">
-                <Link href={`/`}>
+                <Link href={`/`} prefetch={false}>
                     <a className={styles.filter__wordButton}>Главная</a>
                 </Link>
                 /
-                <Link href={`/account/login`}>
+                <Link href={`/account/login`} prefetch={false}>
                     <a className={styles.filter__wordButton}>Вход</a>
                 </Link>
                 /
-                <Link href={`/account/register`}>
+                <Link href={`/account/register`} prefetch={false}>
                     <a className={styles.filter__wordButton}>Регистрация</a>
                 </Link>
                 {/*<button>корзина</button>*/}

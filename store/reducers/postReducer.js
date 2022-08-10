@@ -17,7 +17,6 @@ const initalState = {
     maxPrice: 9999999
 }
 export const postReducer = (state = initalState, action) => {
-    console.log(state);
     switch (action.type) {
         case types.GET_POSTS:
             return {
@@ -29,7 +28,6 @@ export const postReducer = (state = initalState, action) => {
             const loadOne = action.payload.flagLoad;
             state.flagLoad = loadOne;
             const newArrayGeneralCategories = [...state.arrayGeneralCategories];
-            console.log(arrayGeneralCategories)
             return {...state, arrayGeneralCategories: newArrayGeneralCategories}
         case  types.API_REQUEST_CATEGORIES:
             if (state.arrayCategories !== []) {
@@ -46,7 +44,6 @@ export const postReducer = (state = initalState, action) => {
                 state.arrayCategoryId = [];
                 state.maxPagesPagination = [];
                 state.search = action.payload.search;
-                console.log(action.payload.minPrice, action.payload.maxPrice)
                 if (action.payload.minPrice !== undefined || action.payload.maxPrice !== undefined) {
                     state.minPrice = action.payload.minPrice;
                     state.maxPrice = action.payload.maxPrice;
@@ -87,10 +84,8 @@ export const postReducer = (state = initalState, action) => {
             // state.pagNum = pagNum;
             return {...state, pagNum: pagNum}
         case types.FILTER_PRICE:
-            console.log('xxxxxxxxxxxxxxxxx', action.payload.minPrices,action.payload.minPrices)
             state.minPrice = action.payload.minPrices;
             state.maxPrice = action.payload.maxPrices;
-            console.log(state.minPrice,state.maxPrice)
             return {...state}
         default:
             return state

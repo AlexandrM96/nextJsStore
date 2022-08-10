@@ -12,7 +12,6 @@ export default function User({userCard, array, baseUrl}) {
     let sum = 0;
 
     for (let i = 0; i < userCard.data.length; i++) {
-        console.log(userCard.data[i].price_value)
         sum += userCard.data[i].price_value;
     }
     return (

@@ -2,18 +2,31 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="94866967-e93c-4119-a144-7483b0d40e87" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/pages/categories/page.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/categories/slugCatalog/[...slug].js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/categories/slugCatalog/[id].js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/categories/slugCatalog/page.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/categories/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/category/[pageOne]/[pageTwo]/[...id].js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/card.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/card.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/categories/[...slug].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/categories/[...slug].js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/categories/[id].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/categories/[id].js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/categories/page.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/categories/slugCatalog/[...slug].js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/categories/slugCatalog/[id].js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/categories/slugCatalog/page.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/404.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/category/[id].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/category/[pageOne]/[pageTwo]/[pageThree]/[pageFour]/[id].js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/component/ArrayCategoriesItem/ArrayCategoriesItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/component/ArrayCategoriesItem/ArrayCategoriesItem.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/component/Aside/Aside.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/component/Aside/Aside.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/component/AsideItem/AsideItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/component/AsideItem/AsideItem.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/Content.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles/Content.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/component/CardItem/CardItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/component/CardItem/CardItem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/component/Content/Content.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/component/Content/Content.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/component/ContentItem/ContentItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/component/ContentItem/ContentItem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/component/Filter/Filter.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/component/Filter/Filter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/component/MainContainer/MainContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/component/MainContainer/MainContainer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/component/NavigationCategoriesButtons/NavigationCategoriesButtons.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/component/NavigationCategoriesButtons/NavigationCategoriesButtons.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/general/[id].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/general/[id].js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/actions/postActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/store/actions/postActions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/reducers/postReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/store/reducers/postReducer.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,6 +65,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/pages/category/[pageOne]/[pageTwo]" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="yarn" />
@@ -60,13 +74,18 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\Biz-Mark\Desktop\dev\nextJsStore\pages\category\[pageOne]\[pageTwo]" />
+      <recent name="C:\Users\Biz-Mark\Desktop\dev\nextJsStore\pages\categories" />
+      <recent name="C:\Users\Biz-Mark\Desktop\dev\nextJsStore\pages\category\[pageOne]\[pageTwo]\[pageThree]\[pageFour]" />
       <recent name="C:\Users\Biz-Mark\Desktop\dev\nextJsStore\pages" />
       <recent name="C:\Users\Biz-Mark\Desktop\dev\nextJsStore\pages\component\Content" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Biz-Mark\Desktop\dev\nextJsStore\pages\categories" />
+      <recent name="C:\Users\Biz-Mark\Desktop\dev\nextJsStore\pages\categories\[pageOne]" />
+      <recent name="C:\Users\Biz-Mark\Desktop\dev\nextJsStore\pages\categories\[pageOne]\[pageTwo]" />
       <recent name="C:\Users\Biz-Mark\Desktop\dev\nextJsStore\pages\category" />
       <recent name="C:\Users\Biz-Mark\Desktop\dev\nextJsStore\pages" />
-      <recent name="C:\Users\Biz-Mark\Desktop\dev\nextJsStore" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -93,6 +112,8 @@
       <workItem from="1659828732992" duration="9622000" />
       <workItem from="1659942035574" duration="18536000" />
       <workItem from="1660051158806" duration="8187000" />
+      <workItem from="1660116732855" duration="5808000" />
+      <workItem from="1660122644793" duration="17623000" />
     </task>
     <servers />
   </component>

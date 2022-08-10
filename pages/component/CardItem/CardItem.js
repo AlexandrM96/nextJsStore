@@ -4,8 +4,6 @@ import React, {useState} from "react";
 
 export default function CardItem(props) {
 
-    console.log(props)
-
     const [state, setState] = useState(() => {
         return {
             displayNum: props.item.quantity,
@@ -26,8 +24,6 @@ export default function CardItem(props) {
         const cardUserId = localStorage.getItem('cardUserId');
 
         const itemId = props.item.offer_id;
-
-        console.log(itemId)
 
         const plusMinus = e.target.innerText;
 
@@ -65,8 +61,6 @@ export default function CardItem(props) {
 
         const baseUrl = `https://bion.biz-mark.ru/api/v1/general`;
 
-        console.log((state.displayNum))
-
         const quantity = plusMinus === '+' ? state.displayNum + 1 : state.displayNum - 1
 
         const api = `${baseUrl}/cart?offer_id=${itemId}&quantity=${quantity}`;
@@ -88,7 +82,6 @@ export default function CardItem(props) {
                             flag: false
                         }
                     })
-                    console.log(data);
                     location.reload();
                 }
             )

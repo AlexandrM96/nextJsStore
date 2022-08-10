@@ -9,7 +9,6 @@ import styles from '../../../styles/Aside.module.css';
 const Aside = (props) => {
     // const  arrayGeneralCategories  = useSelector((state) => state.post.arrayGeneralCategories[0]);
     // const {posts} = useSelector(state => state.post);
-console.log(props.items)
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -23,7 +22,7 @@ console.log(props.items)
                 <div className={styles.aside__container}>
                     <ul className={styles.aside__container__ulList}>
                         {props.items.categories.map(item =>
-                            <Link href={`/categories/[id]`} as={`/categories/${item.slug}`} prefetch>
+                            <Link href={`/categories/[id]`} as={`/categories/${item.slug}`} prefetch={false}>
                             <li
                                 className={styles.ulList__element}
                                 key={item.id}

@@ -10,7 +10,7 @@ import React from "react";
 
 export default function Content({item, urlPage, array}) {
 
-    console.log(item, urlPage, urlPage.split('='), urlPage.split('=')[1][0]);
+    // console.log(item, urlPage, urlPage.split('='), urlPage.split('=')[1][0]);
 
     const newUrl = urlPage.split('=').pop();
 
@@ -46,7 +46,6 @@ export default function Content({item, urlPage, array}) {
     let pagNum = useSelector((state) => state.post.pagNum);
 
     let page = [...maxPagesPagination];
-    console.log(page)
 
     let newPage = [];
 

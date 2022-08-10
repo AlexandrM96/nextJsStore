@@ -1,13 +1,11 @@
-import styles from '../../../styles/ContentItem.module.css';
-import * as types from "../../../store/reducers/types";
 import React, {useState} from "react";
-import Link from "next/link";
-import Image from "next/image";
 import {useRouter} from "next/router";
+import MainContainer from '../../../../../component/MainContainer/MainContainer';
+import styles from "../../../../../../styles/Item.module.css";
 
-export default function ContentItem(props) {
-
-    const router = useRouter();
+export default function Item({item, array}) {
+    const {query} = useRouter();
+    console.log(query, item)
 
     const [state, setState] = useState(() => {
         return {
@@ -28,9 +26,7 @@ export default function ContentItem(props) {
 
         const cardUserId = localStorage.getItem('cardUserId');
 
-        const token = localStorage.getItem('tokenAuth');
-
-        const itemId = props.item.id;
+        const itemId = item.data.id;
 
         const baseUrl = `https://bion.biz-mark.ru/api/v1/general`;
 
@@ -41,7 +37,6 @@ export default function ContentItem(props) {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`,
                 'cart': cardUserId
             },
         })
@@ -63,7 +58,6 @@ export default function ContentItem(props) {
 
     const handleClick = (e) => {
         const plusMinus = e.target.innerText;
-        const quantity = props.item.offers[0].quantity;
         // if (state.displayNum < quantity) {
         if (state.displayNum <= 1) {
             plusMinus === '+' ?
@@ -96,30 +90,42 @@ export default function ContentItem(props) {
                     }
                 })
         }
-
     };
 
-    // console.log(props, router.query.slug);
-
     return (
-        <div className={styles.contentItem}>
-            <div className={styles.contentItem__container}>
-                <Link
-                      href={``} as={`/${props.url}/${props.item.slug}`} prefetch={false}>
-                    <a>
-                        <div className={styles.contentItem__containerInfo}>
-                            <img src='https://aristokratrest.com/files/aristokratrest/image/no_product.jpg'
-                                   height="50"
-                                   width="50"
-                                   alt='play'/>
-                            <p>{props.item.name}</p>
-                        </div>
-                    </a>
-                </Link>
-                <div className={styles.contentItem__containerPriseAndCart}>
-                    <div>
-                        {props.item.offers[0].price}{props.item.offers[0].currency}
-                    </div>
+        <MainContainer items={array.data}>
+            <div>
+                <h1>{item.data.name}</h1>
+                <div className={styles.item__infoContainer}>
+                    <img src='https://aristokratrest.com/files/aristokratrest/image/no_product.jpg' alt='play'/>
+                    <ul>
+                        <li>Price: <span
+                            className={styles.item__infoContainer__span}>{item.data.offers[0].price} ₽ </span>
+                        </li>
+                        <li>Bonuses: <span
+                            className={styles.item__infoContainer__span}>{item.data.offers[0].bonuses}</span>
+                        </li>
+                        <li>Code: <span className={styles.item__infoContainer__span}>{item.data.offers[0].code}</span>
+                        </li>
+                        <li>Height: <span
+                            className={styles.item__infoContainer__span}>{item.data.offers[0].height}</span>
+                        </li>
+                        <li>Quantity: <span
+                            className={styles.item__infoContainer__span}>{item.data.offers[0].quantity}</span></li>
+                        <li>Volume: <span
+                            className={styles.item__infoContainer__span}>{item.data.offers[0].volume}</span>
+                        </li>
+                        <li>Weight: <span
+                            className={styles.item__infoContainer__span}>{item.data.offers[0].weight}</span>
+                        </li>
+                        <li>Width: <span className={styles.item__infoContainer__span}>{item.data.offers[0].width}</span>
+                        </li>
+                        <li>Description: <span
+                            className={styles.item__infoContainer__span}>{item.data.description}</span>
+                        </li>
+                    </ul>
+                </div>
+                <div className={styles.itemContainer__itemButtons}>
                     <div className={styles.listItemCard__itemButtons}>
                         <button onClick={handleClick}>+</button>
                         <div>
@@ -138,6 +144,18 @@ export default function ContentItem(props) {
                     </div>
                 </div>
             </div>
-        </div>
-    );
+        </MainContainer>
+    )
+};
+
+export async function getServerSideProps({params}) {
+    const baseUrl = `https://bion.biz-mark.ru/api/v1/general`;
+    const response = await fetch(`${baseUrl}/products/${params.id}`);
+    const item = await response.json();
+    const baseUrlTwo = `https://bion.biz-mark.ru/api/v1/general`;
+    const responseTwo = await fetch(`${baseUrlTwo}/categories`);
+    const array = await responseTwo.json();
+    return {
+        props: {item, array}, // will be passed to the page component as props
+    }
 }

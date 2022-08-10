@@ -10,7 +10,6 @@ import MainContainer from "./component/MainContainer/MainContainer";
 import styles from '../styles/Home.module.css'
 
 export default function Home({baseUrl, array, arrayTwo}) {
-    console.log(arrayTwo);
 
     const [auth, setAuth] = useState(() => {
         return {

@@ -9,11 +9,11 @@ import {
 import styles from '../../../styles/ArrayCategoriesItem.module.css';
 import Link from "next/link";
 import React from "react";
+import {useRouter} from "next/router";
 
 export default function ArrayCategoriesItem(props) {
-    
 
-    console.log(props.item)
+    const router = useRouter();
 
     const minPriсe = useSelector((state) => state.post.minPrice);
 
@@ -35,7 +35,7 @@ export default function ArrayCategoriesItem(props) {
 
     return (
         <p onClick={clickCategory} className={styles.arrayCategoriesItem}>
-            <Link href={`/categories/[id]/[...slug]`} as={`/categories/${props.slug}/${props.item.slug}`} prefetch>
+            <Link href={`/categories/[id]/[...slug]`} as={`/categories/${props.slug}/${props.item.slug}`}  prefetch={false}>
                     {props.item.name}
             </Link>
         </p>

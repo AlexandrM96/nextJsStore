@@ -189,7 +189,6 @@ export const fetchpostsEight = (page, id, value, minPriсe, maxPriсe) => async 
             maxPrices: maxPriсe
         }
     })
-    console.log('idddddddddddddddddddddd', id)
     const api = id !== '' ?
         `${baseUrl}/products?page=${+page}&category=${id}&filter[price][min]=${minPriсe}&filter[price][max]=${maxPriсe}`
         :

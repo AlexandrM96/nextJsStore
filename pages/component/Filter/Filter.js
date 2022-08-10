@@ -63,7 +63,7 @@ export default function Filter() {
                         onChange={changeInput}
                     />
                     <Link
-                        href={`general/products?search=${state.settingName}&filter[price][min]=${state.minPrice}&filter[price][max]=${state.maxPrice}`}>
+                        href={`general/products?search=${state.settingName}&filter[price][min]=${state.minPrice}&filter[price][max]=${state.maxPrice}`} prefetch={false}>
                         <a>
                             <button className={styles.filter__wordButton}
                                     onClick={() => (dispatch(fetchpostsEight(pagNum, categoryId, state.settingName, state.minPrice, state.maxPrice)))}
@@ -102,7 +102,7 @@ export default function Filter() {
                     </div>
                 </div>
                 <Link
-                    href={`general/products?search=${state.settingName}&filter[price][min]=${state.minPrice}&filter[price][max]=${state.maxPrice}`}>
+                    href={`general/products?search=${state.settingName}&filter[price][min]=${state.minPrice}&filter[price][max]=${state.maxPrice}`} prefetch={false}>
                     <a>
                         <button
                             onClick={() => (dispatch(fetchpostsEight(pagNum, categoryId, state.settingName, state.minPrice, state.maxPrice)))}
@@ -116,10 +116,10 @@ export default function Filter() {
                 >
                     Очистить
                 </button>
-                <Link href={`/card/27`}>
+                <Link href={`/card/27`} prefetch={false}>
                     <a className={styles.filter__wordButton}>Корзина</a>
                 </Link>
-                <Link href={`/spisok-pokupok`}>
+                <Link href={`/spisok-pokupok`} prefetch={false}>
                     <a className={styles.filter__wordButton}>Список покупок</a>
                 </Link>
             </div>

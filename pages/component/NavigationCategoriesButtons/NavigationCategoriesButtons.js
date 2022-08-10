@@ -9,11 +9,8 @@ export default function NavigationCategoriesButtons(props) {
     const baseUrl = `https://bion.biz-mark.ru/api/v1/general`;
     const newUrl = props.url.split('/');
 
-    console.log(props,newUrl);
-
     return (
-        <Link href={`/categories/slugCatalog[id]`} as={`${newUrl[1]}/${newUrl[2]}/${newUrl[3]}/${props.item.slug}`}
-              prefetch>
+        <Link href={`/categories/[...slug]`} as={`/${newUrl[1]}/${newUrl[2]}/${newUrl[3]}/${props.item.slug}`} prefetch={false}>
             <a>
                 {props.item.name}
             </a>

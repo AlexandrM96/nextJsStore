@@ -1,10 +1,11 @@
 import React, {useState} from "react";
 import {useRouter} from "next/router";
-import MainContainer from "../component/MainContainer/MainContainer";
-import styles from "../../styles/Item.module.css";
+import MainContainer from '../../../component/MainContainer/MainContainer';
+import styles from "../../../../styles/Item.module.css";
 
 export default function Item({item, array}) {
-    const {query} = useRouter();
+    const {query} = useRouter()
+
     console.log(query, item)
 
     const [state, setState] = useState(() => {

@@ -10,7 +10,6 @@ import React from "react";
 
 export default function Catalog({urlPage, arrayItems, arrayAside, productsCategoryId}) {
 
-console.log('nen', urlPage, arrayItems,arrayAside ,productsCategoryId)
 
     // console.log(arrayItems, urlPage, urlPage.split('='), urlPage.split('=')[1][0]);
 
@@ -48,7 +47,6 @@ console.log('nen', urlPage, arrayItems,arrayAside ,productsCategoryId)
     let pagNum = useSelector((state) => state.post.pagNum);
 
     let page = [...maxPagesPagination];
-    console.log(page)
 
     let newPage = [];
 
@@ -141,7 +139,6 @@ console.log('nen', urlPage, arrayItems,arrayAside ,productsCategoryId)
 export async function getServerSideProps({req,params}) {
     //запрос для получения всех товаров по слагу
     const urlPage = req.url;
-    console.log('rrrrrrrrrrrrrrrrrrrr',urlPage);
     const baseUrl = `https://bion.biz-mark.ru/api/v1/general`;
     const response = await fetch(`${baseUrl}${urlPage}`);
     const item = await response.json();

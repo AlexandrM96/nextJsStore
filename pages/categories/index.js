@@ -14,7 +14,6 @@ import Link from "next/link";
 import MainContainer from "../component/MainContainer/MainContainer";
 import NavigationCategoriesButtons from '../component/NavigationCategoriesButtons/NavigationCategoriesButtons';
 import {useSelector} from "react-redux";
-import {useRouter} from "next/router";
 
 
 export default function CatalogTwo({
@@ -25,6 +24,8 @@ export default function CatalogTwo({
                                        productsCategoryArray,
                                        arrayNavigation
                                    }) {
+
+    console.log('nenenenenn', urlPage, arrayItems, arrayAside, productsCategoryId, productsCategoryArray, arrayNavigation)
 
     const navigationCategoriesArray = arrayNavigation.data.categories;
     // console.log(arrayItems, urlPage, urlPage.split('='), urlPage.split('=')[1][0]);
@@ -63,6 +64,7 @@ export default function CatalogTwo({
     let pagNum = useSelector((state) => state.post.pagNum);
 
     let page = [...maxPagesPagination];
+    console.log(page)
 
     let newPage = [];
 
@@ -116,7 +118,7 @@ export default function CatalogTwo({
                             className={styles.content__containerList}
                             key={item.id}
                         >
-                            <ContentItem url={urlPage} item={item}/>
+                            <ContentItem item={item}/>
                         </div>
                     )}
                 </div>
@@ -165,30 +167,10 @@ export default function CatalogTwo({
 }
 
 export async function getServerSideProps({req, params}) {
-    const baseUrl = `https://bion.biz-mark.ru/api/v1/general`;
-    const urlPage = req.url;
-    console.log(params)
-    let urlArray = params.slug;
-    for (let i = 0; i < urlArray.length; i++) {
-        const response = await fetch(`${baseUrl}/categories/${urlArray[i]}`);
-        const items = await response.json();
-        console.log('запрос', urlArray[i], 'ответ', items)
-        if (!items.status) {
-            return {notFound: true};
-        }else {
-            const productsCategoryId = items.data.id;
-            const responseOne = await fetch(`${baseUrl}/categories?categories=${productsCategoryId}`);
-            const arrayItems = await responseOne.json();
-            console.log('asasasa', arrayItems.data.categories.parent_id);
-            if (arrayItems.data.categories.parent_id !== undefined) {
-                if (arrayItems.data.categories.parent_id !== productsCategoryId) {
-                    return {notFound: true};
-                }
-            }
-        }
-    }
     //запрос для получения всех товаров по одной категории по слагу
+    const urlPage = req.url;
     const newUrlPage = urlPage.split('/').pop();
+    const baseUrl = `https://bion.biz-mark.ru/api/v1/general`;
     const response = await fetch(`${baseUrl}/categories/${newUrlPage}`);
     const item = await response.json();
     const productsCategoryId = item.data.id;
@@ -211,35 +193,8 @@ export async function getServerSideProps({req, params}) {
     const baseUrlTwo = `https://bion.biz-mark.ru/api/v1/general`;
     const responseThree = await fetch(`${baseUrlTwo}/categories`);
     const arrayAside = await responseThree.json();
-    // console.log('sadasdasdadsasdadsadsasdddcccccc',productsCategoryArray.children_id_list.length,str, arrayNavigation, urlPage.split('/'))
-    return {
-        props: {urlPage, arrayItems, arrayAside, productsCategoryId, productsCategoryArray, arrayNavigation}
-    }
 
+        return {
+            props: {urlPage, arrayItems, arrayAside, productsCategoryId, productsCategoryArray, arrayNavigation}
+        }
 }
-
-// //запрос для получения всех товаров по одной категории по слагу
-// const newUrlPage = urlPage.split('/').pop();
-// const response = await fetch(`${baseUrl}/categories/${newUrlPage}`);
-// const item = await response.json();
-// const productsCategoryId = item.data.id;
-// const productsCategoryArray = item.data;
-// const responseTwo = await fetch(`${baseUrl}/products?category=${productsCategoryId}`);
-// const arrayItems = await responseTwo.json();
-// //запрос для получения товаров из категории внутри категории
-// const str = productsCategoryArray.children_id_list.join('|');
-// //сравнить по строке str
-// const responseFour = await fetch(`${baseUrl}/categories?categories=${str}`);
-// let arrayNavigation = await responseFour.json();
-// if (productsCategoryArray.children_id_list.length === 0) {
-//     arrayNavigation = {
-//         data: {
-//             categories: []
-//         }
-//     }
-// }
-// //запрос для боковой панели
-// const baseUrlTwo = `https://bion.biz-mark.ru/api/v1/general`;
-// const responseThree = await fetch(`${baseUrlTwo}/categories`);
-// const arrayAside = await responseThree.json();
-// // console.log('sadasdasdadsasdadsadsasdddcccccc',productsCategoryArray.children_id_list.length,str, arrayNavigation, urlPage.split('/'))

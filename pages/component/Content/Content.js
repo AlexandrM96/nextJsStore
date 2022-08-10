@@ -52,8 +52,6 @@ export default function Content() {
         pagNum = 1;
     }
 
-    console.log('aaaaaadddddddddasddd', arrayCategoryId);
-
     return (
         <div className={styles.content}>
             <div className={styles.content__container}>
@@ -88,7 +86,7 @@ export default function Content() {
                         className={pagNum === page ? styles.content__pagesCount__true : styles.content__pagesCount}
                         onClick={(e) => dispatch(fetchpostsThree(+categoryId, page, search, minPriсe, maxPriсe))}
                     >
-                        <Link href={`general/products?page=${page}&category=${categoryId}`}>
+                        <Link href={`general/products?page=${page}&category=${categoryId}`} prefetch={false}>
                             <a>
                                 {page}
                             </a>
