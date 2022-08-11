@@ -99,13 +99,13 @@ export default function ContentItem(props) {
 
     };
 
-    // console.log(props, router.query.slug);
+    console.log(props, router.query.slug);
 
     return (
         <div className={styles.contentItem}>
             <div className={styles.contentItem__container}>
                 <Link
-                      href={``} as={`/${props.url}/${props.item.slug}`} prefetch={false}>
+                      href={`/categories/[id]/[...slug]`} as={`/categories/${props.item.pageUrl}`} prefetch={false}>
                     <a>
                         <div className={styles.contentItem__containerInfo}>
                             <img src='https://aristokratrest.com/files/aristokratrest/image/no_product.jpg'
