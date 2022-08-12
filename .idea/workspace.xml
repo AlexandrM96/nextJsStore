@@ -2,16 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="94866967-e93c-4119-a144-7483b0d40e87" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/pages/component/Item/Item.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/component/PaginationButtons/PaginationButtons.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/404.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/404.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/categories/[...slug].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/categories/[...slug].js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/category/[pageOne]/[pageTwo]/[...id].js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/category/[pageOne]/[pageTwo]/[pageThree]/[pageFour]/[id].js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/categories/[id].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/categories/[id].js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/component/Content/Content.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/component/Content/Content.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/component/ContentItem/ContentItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/component/ContentItem/ContentItem.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/general/[id].js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/Item.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles/Item.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/component/Item/Item.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/component/Item/Item.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/component/NavigationCategoriesButtons/NavigationCategoriesButtons.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/component/NavigationCategoriesButtons/NavigationCategoriesButtons.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,7 +52,7 @@
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="yarn" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Console Colors" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
@@ -99,7 +97,8 @@
       <workItem from="1660051158806" duration="8187000" />
       <workItem from="1660116732855" duration="5808000" />
       <workItem from="1660122644793" duration="18175000" />
-      <workItem from="1660201220525" duration="28318000" />
+      <workItem from="1660201220525" duration="28716000" />
+      <workItem from="1660287536243" duration="24100000" />
     </task>
     <servers />
   </component>

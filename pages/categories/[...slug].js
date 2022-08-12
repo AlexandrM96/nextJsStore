@@ -27,22 +27,23 @@ export default function CatalogTwo({
     );
 }
 
-export async function getServerSideProps({req, params}) {
+export async function getServerSideProps({req, params, query}) {
     const baseUrl = `https://bion.biz-mark.ru/api/v1/general`;
     const urlPage = req.url;
-    const newUrlPage = urlPage.split('/').pop();
+    const newUrlPage = params.slug[params.slug.length - 1];
     let flag = false;
     let urlArray = params.slug;
     let itemsArray = [];
 
     // работа пагинации
-    if (newUrlPage.split('=').shift() === 'page') {
-        const response = await fetch(`${baseUrl}/categories/${urlArray[urlArray.length - 2]}`);
+    if (query.page !== undefined && typeof +query.page === 'number') {
+        const response = await fetch(`${baseUrl}/categories/${urlArray[urlArray.length - 1]}`);
         const item = await response.json();
         const productsCategoryId = item.data.id;
         const productsCategoryArray = item.data;
-        const responseTwo = await fetch(`${baseUrl}/products?page=${newUrlPage.split('=').pop()}&category=${productsCategoryId}`);
+        const responseTwo = await fetch(`${baseUrl}/products?page=${query.page}&category=${productsCategoryId}`);
         const arrayItems = await responseTwo.json();
+
         //запрос для получения товаров из категории внутри категории
         const str = productsCategoryArray.children_id_list.join('|');
         const responseFour = await fetch(`${baseUrl}/categories?categories=${str}`);
@@ -63,7 +64,6 @@ export async function getServerSideProps({req, params}) {
         }
 
     }
-
 
     // страница одного товара
     if (urlArray.length > 3 && newUrlPage.split('=').shift() !== 'page') {
@@ -149,6 +149,7 @@ export async function getServerSideProps({req, params}) {
     }
     // строка для теста / web-kamery-kolonki-naushniki-mikrofony / kolonki / kolonki-jbl
     //запрос для получения всех товаров по одной категории по слагу
+    //params.slug.join('/')
     const response = await fetch(`${baseUrl}/categories/${newUrlPage}`);
     const item = await response.json();
     const productsCategoryId = item.data.id;

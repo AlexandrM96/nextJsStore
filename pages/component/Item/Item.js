@@ -22,7 +22,7 @@ export default function Item(props) {
 
         const cardUserId = localStorage.getItem('cardUserId');
 
-        const itemId =props.item.data.id;
+        const itemId = props.item.data.id;
 
         const baseUrl = `https://bion.biz-mark.ru/api/v1/general`;
 

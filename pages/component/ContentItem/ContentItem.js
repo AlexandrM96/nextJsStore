@@ -1,13 +1,9 @@
 import styles from '../../../styles/ContentItem.module.css';
-import * as types from "../../../store/reducers/types";
 import React, {useState} from "react";
 import Link from "next/link";
 import Image from "next/image";
-import {useRouter} from "next/router";
 
 export default function ContentItem(props) {
-
-    const router = useRouter();
 
     const [state, setState] = useState(() => {
         return {
@@ -98,8 +94,6 @@ export default function ContentItem(props) {
         }
 
     };
-
-    console.log(props, router.query.slug);
 
     return (
         <div className={styles.contentItem}>
