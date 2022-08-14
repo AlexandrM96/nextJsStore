@@ -63,14 +63,13 @@ export default function Filter() {
                         onChange={changeInput}
                     />
                     <Link
-                        href={`general/products?search=${state.settingName}&filter[price][min]=${state.minPrice}&filter[price][max]=${state.maxPrice}`} prefetch={false}>
-                        <a>
+                        href={`/search/${state.settingName}`} prefetch={false}>
+                        {/*href={`general/products?search=${state.settingName}&filter[price][min]=${state.minPrice}&filter[price][max]=${state.maxPrice}`} prefetch={false}>as={`/search/${state.settingName}`}*/}
                             <button className={styles.filter__wordButton}
                                     onClick={() => (dispatch(fetchpostsEight(pagNum, categoryId, state.settingName, state.minPrice, state.maxPrice)))}
                             >
                                 Поиск
                             </button>
-                        </a>
                     </Link>
                 </div>
                 <div className={styles.filter__containerPrice}>
@@ -102,7 +101,8 @@ export default function Filter() {
                     </div>
                 </div>
                 <Link
-                    href={`general/products?search=${state.settingName}&filter[price][min]=${state.minPrice}&filter[price][max]=${state.maxPrice}`} prefetch={false}>
+                    href={`general/products?search=${state.settingName}&filter[price][min]=${state.minPrice}&filter[price][max]=${state.maxPrice}`}
+                    prefetch={false}>
                     <a>
                         <button
                             onClick={() => (dispatch(fetchpostsEight(pagNum, categoryId, state.settingName, state.minPrice, state.maxPrice)))}
