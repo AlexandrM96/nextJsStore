@@ -1,13 +1,6 @@
-import {useSelector, useDispatch} from 'react-redux'
-import ContentItem from '../component/ContentItem/ContentItem';
 import MainContainer from "../component/MainContainer/MainContainer";
-import Image from "next/image";
-import Image1 from '../../public/img/down.png';
-import styles from '../../styles/Content.module.css';
-import Link from "next/link";
 import React from "react";
 import Content from "../component/Content/Content";
-
 
 export default function Catalog({
                                     urlPage,
@@ -18,7 +11,7 @@ export default function Catalog({
                                 }) {
 
     return (
-        <MainContainer url={urlPage} items={arrayAside.data}>
+        <MainContainer url={urlPage} arrayItems={arrayItems} items={arrayAside.data}>
             <div>
                 <Content
                     urlPage={urlPage}
@@ -44,12 +37,21 @@ export async function getServerSideProps({req, params, query}) {
             categories: []
         }
     }
+
+    //работа пагинации
     if (query.page !== undefined && typeof +query.page === 'number') {
         const response = await fetch(`${baseUrl}/categories/${urlArray}`);
         const item = await response.json();
+        if (!item.status) {
+            console.log('не прошел проверку на левые значения');
+            return {notFound: true};
+        }
         const productsCategoryId = item.data.id;
         const productsCategoryArray = item.data;
-        const responseTwo = await fetch(`${baseUrl}/products?page=${query.page}&category=${productsCategoryId}`);
+        const responseTwo = (query.filter_min_price && query.filter_min_price) !== undefined ?
+            await fetch(`${baseUrl}/products?page=${query.page}&category=${productsCategoryId}&[price][min]=${query.filter_min_price}&filter[price][max]=${query.filter_max_price}`)
+            :
+            await fetch(`${baseUrl}/products?page=${query.page}&category=${productsCategoryId}`);
         const arrayItems = await responseTwo.json();
         //запрос для боковой панели
         const baseUrlTwo = `https://bion.biz-mark.ru/api/v1/general`;
@@ -59,6 +61,31 @@ export async function getServerSideProps({req, params, query}) {
             props: {urlPage, arrayItems, arrayAside, productsCategoryId, productsCategoryArray, arrayNavigation, flag}
         }
 
+    }
+
+//работа фильтра
+    if (
+        ((query.filter_min_price && query.filter_min_price) !== undefined)
+        &&
+        ((typeof +query.filter_min_price && typeof +query.filter_min_price) === 'number')
+    ) {
+        const response = await fetch(`${baseUrl}/categories/${urlArray}`);
+        const item = await response.json();
+        if (!item.status) {
+            console.log('не прошел проверку на левые значения');
+            return {notFound: true};
+        }
+        const productsCategoryId = item.data.id;
+        const productsCategoryArray = item.data;
+        const responseTwo = await fetch(`${baseUrl}/products?category=${productsCategoryId}&filter[price][min]=${query.filter_min_price}&filter[price][max]=${query.filter_max_price}`);
+        const arrayItems = await responseTwo.json();
+        //запрос для боковой панели
+        const baseUrlTwo = `https://bion.biz-mark.ru/api/v1/general`;
+        const responseThree = await fetch(`${baseUrlTwo}/categories`);
+        const arrayAside = await responseThree.json();
+        return {
+            props: {urlPage, arrayItems, arrayAside, productsCategoryId, productsCategoryArray, arrayNavigation, flag}
+        }
     }
 
 
@@ -71,6 +98,7 @@ export async function getServerSideProps({req, params, query}) {
     const responseTwo = await fetch(`${baseUrl}/products?category=${productsCategoryId}`);
     const arrayItems = await responseTwo.json();
     // запрос для боковой панели
+
     const baseUrlTwo = `https://bion.biz-mark.ru/api/v1/general`;
     const responseThree = await fetch(`${baseUrlTwo}/categories`);
     const arrayAside = await responseThree.json();

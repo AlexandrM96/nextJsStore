@@ -1,13 +1,12 @@
 import {useRouter} from "next/router";
 import CardItem from "../component/CardItem/CardItem";
 import MainContainer from "../component/MainContainer/MainContainer";
-import styles from '../../styles/Card.module.css';
 import Head from "next/head";
-import React from "react";
+import styles from '../../styles/Card.module.css';
 
-export default function User({userCard, array, baseUrl}) {
+export default function User({userCard, array, baseUrl, arrayItems}) {
 
-    const {query} = useRouter()
+    const {query} = useRouter();
 
     let sum = 0;
 
@@ -15,16 +14,17 @@ export default function User({userCard, array, baseUrl}) {
         console.log(userCard.data[i].price_value)
         sum += userCard.data[i].price_value;
     }
+
     return (
         <>
             <Head>
                 <meta></meta>
                 <title>Корзина</title>
             </Head>
-            <MainContainer url={baseUrl} items={array.data}>
-                <div className={styles.card}>
+            <MainContainer url={baseUrl} arrayItems={arrayItems} items={array.data}>
+                <div>
                     <div className={styles.card__container}>
-                        <uL className={styles.card__container__list}>
+                        <uL>
                             {userCard.data.map(item =>
                                 <li
                                     className={styles.card__container__listElement}
@@ -46,23 +46,28 @@ export default function User({userCard, array, baseUrl}) {
 };
 
 export async function getServerSideProps({params}) {
-
-    const baseUrl = `https://bion.biz-mark.ru/api/v1/general/cart`;
-
-    const response = await fetch(baseUrl, {
+    let url = params;
+    const baseUrl = `https://bion.biz-mark.ru/api/v1/general`;
+    const response = await fetch(`${baseUrl}/cart`, {
         method: 'GET',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'cart': 27
+            'cart': url.id
         }
-    })
+    });
     const userCard = await response.json();
-    const baseUrlTwo = `https://bion.biz-mark.ru/api/v1/general`;
-    const responseTwo = await fetch(`${baseUrlTwo}/categories`);
+    const responseTwo = await fetch(`${baseUrl}/categories`);
     const array = await responseTwo.json();
-
+    const arrayItems = {
+        data: {
+            price: {
+                min: 0,
+                max: 0
+            },
+        }
+    };
     return {
-        props: {userCard, array, baseUrl}, // will be passed to the page component as props
+        props: {userCard, array, baseUrl, arrayItems}, // will be passed to the page component as props
     }
 }

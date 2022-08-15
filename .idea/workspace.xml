@@ -2,9 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="94866967-e93c-4119-a144-7483b0d40e87" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/pages/search/[id].js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/spisok-pokupok/[id].js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/account/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/account/login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/account/register.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/account/register.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/card/[id].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/card/[id].js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/categories/[...slug].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/categories/[...slug].js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/categories/[id].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/categories/[id].js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/component/CardItem/CardItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/component/CardItem/CardItem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/component/Content/Content.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/component/Content/Content.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/component/ContentItem/ContentItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/component/ContentItem/ContentItem.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/component/Filter/Filter.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/component/Filter/Filter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/component/MainContainer/MainContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/component/MainContainer/MainContainer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/component/PaginationButtons/PaginationButtons.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/component/PaginationButtons/PaginationButtons.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/search/[id].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/search/[id].js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/spisok-pokupok.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/Content.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles/Content.module.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,16 +55,9 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "/home/alexandr/Рабочий стол/Development/nextJsStore",
-    "node.js.detected.package.eslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "nodejs_package_manager_path": "yarn",
-    "vue.rearranger.settings.migration": "true"
-  }
-}]]></component>
+  <component name="PropertiesComponent">
+    <property name="nodejs_package_manager_path" value="yarn" />
+  </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\Biz-Mark\Desktop\dev\nextJsStore\pages\category\[pageOne]\[pageTwo]" />
@@ -112,6 +119,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />

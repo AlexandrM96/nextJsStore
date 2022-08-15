@@ -17,6 +17,14 @@ export default function Content(props) {
 
     const flagLoad = useSelector((state) => state.post.flagLoad);
 
+    const newUrlTwo = router.asPath.split('=').shift();
+
+    if ((newUrlTwo.split('?').pop() === 'page') || (newUrlTwo.split('?').pop() === 'filter_min_price')) {
+        let urlArr = url.split('?');
+        urlArr.pop();
+        url = urlArr[0];
+    }
+
     return (
         <div className={styles.content}>
             <div className={styles.content__container}>

@@ -1,21 +1,28 @@
 import {useRouter} from "next/router";
-import CardItem from "./component/CardItem/CardItem";
-import styles from '../styles/Card.module.css';
 
 export default function WishList({userWishList}) {
 
     const {query} = useRouter()
 
+    console.log(userWishList)
     return (
-        <div className={styles.card}>
+        <div>
             фывфывфвыфвы
         </div>
     )
 };
 
 export async function getServerSideProps({params}) {
-    const baseUrl = `https://bion.biz-mark.ru/api/v1/general/wishlist`;
-    const response = await fetch(baseUrl);
+    let token = params.id;
+    const baseUrl = `https://bion.biz-mark.ru/api/v1/general`;
+    const response = await fetch(`${baseUrl}/wishlist`, {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'cart': `Bearer ${token}`
+        }
+    });
     const userWishList = await response.json();
     return {
         props: {userWishList}, // will be passed to the page component as props

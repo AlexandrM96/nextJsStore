@@ -1,15 +1,12 @@
 import Head from 'next/head'
-import Image from 'next/image'
 import React, {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {fetchposts} from '../store/actions/postActions';
 import Main from './component/Main/Main';
-import Filter from './component/Filter/Filter'
-import Link from "next/link";
 import MainContainer from "./component/MainContainer/MainContainer";
 import styles from '../styles/Home.module.css'
 
-export default function Home({baseUrl, array, arrayTwo}) {
+export default function Home({baseUrl, array, arrayItems}) {
 
     const [auth, setAuth] = useState(() => {
         return {
@@ -43,6 +40,7 @@ export default function Home({baseUrl, array, arrayTwo}) {
     }
 
     useEffect(() => {
+        const cardUserId = localStorage.getItem('cardUserId');
         const baseUrl = `https://bion.biz-mark.ru/api/v1/account`;
         const token = localStorage.getItem('tokenAuth');
         let idCard = '';
@@ -75,7 +73,8 @@ export default function Home({baseUrl, array, arrayTwo}) {
                 }
             });
         dispatch(fetchposts());
-    }, [])
+        console.log(cardUserId);
+    }, []);
 
     return (
         <div className={styles.container}>
@@ -85,27 +84,9 @@ export default function Home({baseUrl, array, arrayTwo}) {
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
             <header>
-                {/*<Link href={`/account/login`}>*/}
-                {/*    <a className={styles.filter__wordButton}>Вход</a>*/}
-                {/*</Link>*/}
-                {/*/*/}
-                {/*<Link href={`/account/register`}>*/}
-                {/*    <a className={styles.filter__wordButton}>Регистрация</a>*/}
-                {/*</Link>*/}
-                {/*/!*<button>корзина</button>*!/*/}
-                {/*<div>*/}
-                {/*    ____________________________________________________________*/}
-                {/*</div>*/}
-                {/*<p>*/}
-                {/*    {auth.auth ? auth.userName : 'Авторизуйтесь!'}*/}
-                {/*</p>*/}
             </header>
-            <MainContainer url={baseUrl} items={array.data}>
+            <MainContainer url={baseUrl} arrayItems={arrayItems} items={array.data}>
                 <main className={styles.main}>
-                    {/*<h1 className={styles.title}>*/}
-                    {/*    Welcome to <a href="https://nextjs.org">Next.js!</a>*/}
-                    {/*</h1>*/}
-                    {/*<Filter/>*/}
                     <Main items={array.data}/>
                 </main>
             </MainContainer>
@@ -119,8 +100,10 @@ export async function getServerSideProps({params}) {
     const baseUrl = `https://bion.biz-mark.ru/api/v1/general`;
     const response = await fetch(`${baseUrl}/categories`);
     const array = await response.json();
+    const responseTwo = await fetch(`${baseUrl}/products`);
+    const arrayItems = await responseTwo.json();
 
     return {
-        props: {baseUrl,array} // will be passed to the page component as props
+        props: {baseUrl, array, arrayItems} // will be passed to the page component as props
     }
 }

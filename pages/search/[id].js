@@ -25,10 +25,7 @@ export default function CatalogTwo({
 export async function getServerSideProps({req, params, query}) {
     const baseUrl = `https://bion.biz-mark.ru/api/v1/general`;
     const urlPage = req.url;
-    const newUrlPage = params.slug[params.slug.length - 1];
-    let flag = false;
     let urlArray = params.slug;
-    let itemsArray = [];
 
     // работа пагинации
     if (query.page !== undefined && typeof +query.page === 'number') {
@@ -55,99 +52,15 @@ export async function getServerSideProps({req, params, query}) {
         const responseThree = await fetch(`${baseUrlTwo}/categories`);
         const arrayAside = await responseThree.json();
         return {
-            props: {urlPage, arrayItems, arrayAside, productsCategoryId, productsCategoryArray, arrayNavigation, flag}
-        }
-
-    }
-
-    // страница одного товара
-    if (urlArray.length > 3 && newUrlPage.split('=').shift() !== 'page') {
-        //проверка на левые значения при условии страницы с одним товаром
-        for (let i = 0; i < urlArray.length - 1; i++) {
-            const response = await fetch(`${baseUrl}/categories/${urlArray[i]}`);
-            const items = await response.json();
-            if (!items.status) {
-                console.log('не прошел проверку на левые значения');
-                return {notFound: true};
-            }
-            itemsArray.push(items);
-        }
-        //проверка на ветку категорий при условии страницы с одним товаром
-        for (let i = 0; i < itemsArray.length - 1; i++) {
-            if (itemsArray[i].data.parent_id !== null) {
-                if (itemsArray[i - 1].data.id !== itemsArray[i].data.parent_id) {
-                    console.log('не прошел проверку на ветку категорий');
-                    return {notFound: true};
-                }
-            }
-        }
-        flag = true;
-        const response = await fetch(`${baseUrl}/products/${urlArray[urlArray.length - 1]}`);
-        const arrayOneItems = await response.json();
-        if (itemsArray[itemsArray.length - 1].data.id !== arrayOneItems.data.category_id) {
-            console.log('не прошел проверку на ветку категорий и родительсуую ветку одного товара');
-            return {notFound: true};
-        }
-        //запрос для боковой панели
-        const baseUrlTwo = `https://bion.biz-mark.ru/api/v1/general`;
-        const responseThree = await fetch(`${baseUrlTwo}/categories`);
-        const arrayAside = await responseThree.json();
-        let productsCategoryId = []
-        let productsCategoryArray = []
-        let arrayNavigation = {
-            data: {
-                categories: []
-            }
-        }
-        let arrayItems = {
-            data: {
-                pagination: {
-                    "count": 1,
-                    "max_pages": 1,
-                    "per_page": 1
-                }
-            }
-        }
-        return {
-            props: {
-                urlPage,
-                arrayItems,
-                arrayAside,
-                productsCategoryId,
-                productsCategoryArray,
-                arrayNavigation,
-                flag,
-                arrayOneItems
-            }
+            props: {urlPage, arrayItems, arrayAside, productsCategoryId, productsCategoryArray, arrayNavigation}
         }
     }
 
 
-    //проверка на левые значения
-    for (let i = 0; i < urlArray.length; i++) {
-        const response = await fetch(`${baseUrl}/categories/${urlArray[i]}`);
-        const items = await response.json();
-        if (!items.status) {
-            console.log('не прошел проверку на левые значения');
-            return {notFound: true};
-        }
-        itemsArray.push(items);
-    }
-    //проверка на ветку категорий
-    for (let i = 0; i < itemsArray.length; i++) {
-        if (itemsArray[i].data.parent_id !== null) {
-            if (itemsArray[i - 1].data.id !== itemsArray[i].data.parent_id) {
-                console.log('не прошел проверку на ветку категорий');
-                return {notFound: true};
-            }
-        }
-    }
-    // строка для теста / web-kamery-kolonki-naushniki-mikrofony / kolonki / kolonki-jbl
-    //запрос для получения всех товаров по одной категории по слагу
     ///products?search=${state.settingName}
-    //params.slug.join('/')
     const response = await fetch(`${baseUrl}/products?search=${'рука'}`);
     const arrayItems = await response.json();
+    console.log('arrrrrrrr', arrayItems)
     //запрос для получения товаров из категории внутри категории
     let arrayNavigation = {
             data: {
@@ -158,7 +71,8 @@ export async function getServerSideProps({req, params, query}) {
     const baseUrlTwo = `https://bion.biz-mark.ru/api/v1/general`;
     const responseThree = await fetch(`${baseUrlTwo}/categories`);
     const arrayAside = await responseThree.json();
+
     return {
-        props: {urlPage, arrayItems, arrayAside, productsCategoryId, productsCategoryArray, arrayNavigation, flag}
+        props: {urlPage, arrayItems, arrayAside, arrayNavigation}
     }
 }

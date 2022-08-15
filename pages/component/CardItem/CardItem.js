@@ -1,6 +1,6 @@
+import React, {useEffect, useState} from "react";
 import style from '../../../styles/CardItem.module.css';
 import styles from "../../../styles/Item.module.css";
-import React, {useState} from "react";
 
 export default function CardItem(props) {
 
@@ -8,25 +8,31 @@ export default function CardItem(props) {
         return {
             displayNum: props.item.quantity,
             btn: true,
-            flag: false
+            flag: false,
+            cardId: null
         }
-    })
+    });
+
+    useEffect(() => {
+        const cardUserId = localStorage.getItem('cardUserId');
+        const token = localStorage.getItem('tokenAuth');
+        setState(prev => {
+            return {
+                ...prev,
+                cardId: cardUserId
+            }
+        })
+    }, []);
 
     const handleClick = (e) => {
-
         setState(prev => {
             return {
                 ...prev,
                 flag: true
             }
         })
-
-        const cardUserId = localStorage.getItem('cardUserId');
-
         const itemId = props.item.offer_id;
-
         const plusMinus = e.target.innerText;
-
         if (state.displayNum <= 1) {
             plusMinus === '+' ?
                 setState(prev => {
@@ -58,19 +64,15 @@ export default function CardItem(props) {
                     }
                 })
         }
-
         const baseUrl = `https://bion.biz-mark.ru/api/v1/general`;
-
         const quantity = plusMinus === '+' ? state.displayNum + 1 : state.displayNum - 1
-
         const api = `${baseUrl}/cart?offer_id=${itemId}&quantity=${quantity}`;
-
         fetch(api, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'cart': cardUserId
+                'cart': state.cardId
             },
         })
             .then((response) => response.json())
@@ -91,19 +93,15 @@ export default function CardItem(props) {
     };
 
     const clickRemoveItem = () => {
-
         const idItemRemove = props.item.id;
-
         const baseUrl = `https://bion.biz-mark.ru/api/v1/general`;
-
         const api = `${baseUrl}/cart?position_id=${idItemRemove}`;
-
         fetch(api, {
             method: 'DELETE',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'cart': 11
+                'cart':  state.cardId
             },
         })
             .then((response) => response.json())
@@ -115,7 +113,6 @@ export default function CardItem(props) {
                 console.error('Error:', error);
             });
     }
-
     return (
         <>
             <p>

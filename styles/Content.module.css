@@ -53,6 +53,10 @@
     border-radius: 100px;
 }
 
+.content__pagesButton:hover {
+    background: #737373;
+}
+
 .content__pagesButton__none {
    display: none;
 }

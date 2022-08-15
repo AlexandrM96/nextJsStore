@@ -6,7 +6,7 @@ import Router from "next/router";
 import MainContainer from "../component/MainContainer/MainContainer";
 import styles from '../../styles/Login.module.css'
 
-export default function Login({userWishList, array}) {
+export default function Login({userWishList, array, arrayItems}) {
 
     const {query} = useRouter();
 
@@ -70,7 +70,7 @@ export default function Login({userWishList, array}) {
     }
 
     return (
-        <MainContainer items={array.data}>
+        <MainContainer arrayItems={arrayItems} items={array.data}>
             <div className={styles.login}>
                 <h2 className={styles.login__title}>Login:</h2>
                 <form className={styles.login__form} onSubmit={submitChackin}>
@@ -120,8 +120,15 @@ export async function getServerSideProps({params}) {
     const baseUrlTwo = `https://bion.biz-mark.ru/api/v1/general`;
     const responseTwo = await fetch(`${baseUrlTwo}/categories`);
     const array = await responseTwo.json();
-
+    const arrayItems = {
+        data: {
+            price: {
+                min: 0,
+                max: 0
+            },
+        }
+    };
     return {
-        props: {userWishList, array}, // will be passed to the page component as props
+        props: {userWishList, array, arrayItems}, // will be passed to the page component as props
     }
 }

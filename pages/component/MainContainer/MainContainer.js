@@ -7,7 +7,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {fetchposts} from "../../../store/actions/postActions";
 import Aside from "../Aside/Aside";
 
-export default function MainContainer ({url, items, children, keywords}) {
+export default function MainContainer ({url, items, children, keywords, arrayItems}) {
 
     const [auth, setAuth] = useState(() => {
         return {
@@ -100,7 +100,7 @@ export default function MainContainer ({url, items, children, keywords}) {
                 <p>
                     {auth.auth ? auth.userName : 'Авторизуйтесь!'}
                 </p>
-                <Filter/>
+                <Filter arrayItems={arrayItems} />
             </div>
             <div className={styles.home__container}>
                 <Aside items={items}/>

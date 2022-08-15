@@ -5,7 +5,7 @@ import Router from "next/router";
 import MainContainer from "../component/MainContainer/MainContainer";
 import styles from '../../styles/Registration.module.css';
 
-export default function Register({userWishList, array}) {
+export default function Register({userWishList, array, arrayItems}) {
 
     const {query} = useRouter()
 
@@ -37,8 +37,8 @@ export default function Register({userWishList, array}) {
             alert("You did not enter phone")
         } else if (register.password !== register.password2) {
             alert("Repeated password incorrectly")
-        // } else if (!validator.isStrongPassword(register.password, {minSymbols: 0})) {
-        //     alert("Password must consist of one lowercase, uppercase letter and number, at least 8 characters")
+            // } else if (!validator.isStrongPassword(register.password, {minSymbols: 0})) {
+            //     alert("Password must consist of one lowercase, uppercase letter and number, at least 8 characters")
         } else {
             const name = register.username;
             const phone = register.phoneNumber;
@@ -75,73 +75,73 @@ export default function Register({userWishList, array}) {
     }
 
     return (
-        <MainContainer items={array.data}>
-        <div className={styles.registration}>
-            <h2 className={styles.registration__title}>Registration</h2>
-            <form className={styles.registration__form} onSubmit={submitChackin}>
-                <p className={styles.registration__formParagraph}>
-                    Name
-                    < input
-                        className={styles.registration__formInput}
-                        type="username"
-                        id="username"
-                        name="username"
-                        value={register.username}
-                        onChange={changeInputRegister}
-                    />
-                </p>
-                <p className={styles.registration__formParagraph}>
-                    Phone number
-                    <input
-                        className={styles.registration__formInput}
-                        type="number"
-                        id="phoneNumber"
-                        name="phoneNumber"
-                        value={register.phoneNumber}
-                        onChange={changeInputRegister}
-                        formnovalidate
-                    />
-                </p>
-                <p className={styles.registration__formParagraph}>
-                    Email
-                    <input
-                        className={styles.registration__formInput}
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={register.email}
-                        onChange={changeInputRegister}
-                        formnovalidate
-                    />
-                </p>
-                <p className={styles.registration__formParagraph}>
-                    Password
-                    <input
-                        className={styles.registration__formInput}
-                        type="password"
-                        id="password"
-                        name="password"
-                        value={register.password}
-                        onChange={changeInputRegister}
-                    />
-                </p>
-                <p className={styles.registration__formParagraph}>
-                    Repeat password
-                    <input
-                        className={styles.registration__formInput}
-                        type="password"
-                        id="password2"
-                        name="password2"
-                        value={register.password2}
-                        onChange={changeInputRegister}
-                    />
-                </p>
-                <input className={styles.registration__formButton}
-                       value={'Sign in'}
-                       type="submit"/>
-            </form>
-        </div>
-            </MainContainer>
+        <MainContainer arrayItems={arrayItems} items={array.data}>
+            <div className={styles.registration}>
+                <h2 className={styles.registration__title}>Registration</h2>
+                <form className={styles.registration__form} onSubmit={submitChackin}>
+                    <p className={styles.registration__formParagraph}>
+                        Name
+                        < input
+                            className={styles.registration__formInput}
+                            type="username"
+                            id="username"
+                            name="username"
+                            value={register.username}
+                            onChange={changeInputRegister}
+                        />
+                    </p>
+                    <p className={styles.registration__formParagraph}>
+                        Phone number
+                        <input
+                            className={styles.registration__formInput}
+                            type="number"
+                            id="phoneNumber"
+                            name="phoneNumber"
+                            value={register.phoneNumber}
+                            onChange={changeInputRegister}
+                            formnovalidate
+                        />
+                    </p>
+                    <p className={styles.registration__formParagraph}>
+                        Email
+                        <input
+                            className={styles.registration__formInput}
+                            type="email"
+                            id="email"
+                            name="email"
+                            value={register.email}
+                            onChange={changeInputRegister}
+                            formnovalidate
+                        />
+                    </p>
+                    <p className={styles.registration__formParagraph}>
+                        Password
+                        <input
+                            className={styles.registration__formInput}
+                            type="password"
+                            id="password"
+                            name="password"
+                            value={register.password}
+                            onChange={changeInputRegister}
+                        />
+                    </p>
+                    <p className={styles.registration__formParagraph}>
+                        Repeat password
+                        <input
+                            className={styles.registration__formInput}
+                            type="password"
+                            id="password2"
+                            name="password2"
+                            value={register.password2}
+                            onChange={changeInputRegister}
+                        />
+                    </p>
+                    <input className={styles.registration__formButton}
+                           value={'Sign in'}
+                           type="submit"/>
+                </form>
+            </div>
+        </MainContainer>
     )
 };
 
@@ -152,8 +152,15 @@ export async function getServerSideProps({params}) {
     const baseUrlTwo = `https://bion.biz-mark.ru/api/v1/general`;
     const responseTwo = await fetch(`${baseUrlTwo}/categories`);
     const array = await responseTwo.json();
-
+    const arrayItems = {
+        data: {
+            price: {
+                min: 0,
+                max: 0
+            },
+        }
+    };
     return {
-        props: {userWishList, array}, // will be passed to the page component as props
+        props: {userWishList, array, arrayItems}, // will be passed to the page component as props
     }
 }

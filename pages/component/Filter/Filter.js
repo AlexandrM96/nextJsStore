@@ -1,30 +1,39 @@
-import React, {useState} from "react";
-import {
-    fetchpostsEight
-} from '../../../store/actions/postActions';
-import styles from '../../../styles/Filter.module.css'
-import {useDispatch, useSelector} from "react-redux";
+import React, {useEffect, useState} from "react";
 import Link from "next/link";
+import {useRouter} from "next/router";
+import styles from '../../../styles/Filter.module.css'
+import {useSelector} from "react-redux";
 
-export default function Filter() {
+export default function Filter(props) {
 
-    const dispatch = useDispatch();
+    const router = useRouter();
 
-    // const cardId = localStorage.getItem('cardUserId');
-    // console.log('local', cardId);
+    let url = router.asPath;
 
-    const categoryId = useSelector((state) => state.post.categoryId);
-
-    const pagNum = useSelector((state) => state.post.pagNum);
+    const newUrlTwo = router.asPath.split('=').shift();
 
     const [state, setState] = useState(() => {
         return {
             settingName: '',
             statusSettingName: false,
-            minPrice: 0,
-            maxPrice: 9999999
+            minPrice: props.arrayItems.data.price.min,
+            maxPrice: props.arrayItems.data.price.max,
+            cardId: null,
+            token: ''
         }
     });
+
+    useEffect(() => {
+        const cardUserId = localStorage.getItem('cardUserId');
+        const token = localStorage.getItem('tokenAuth');
+        setState(prev => {
+            return {
+                ...prev,
+                cardId: cardUserId,
+                token: token
+            }
+        })
+    }, []);
 
     const changeInput = event => {
         event.persist()
@@ -37,16 +46,24 @@ export default function Filter() {
     };
 
     const clickRemove = () => {
-        dispatch(fetchpostsEight(pagNum, categoryId, '', 0, 9999999));
         setState(prev => {
             return {
                 ...prev,
                 settingName: '',
                 statusSettingName: false,
                 minPrice: 0,
-                maxPrice: 9999999
+                maxPrice: 0
             }
         })
+        router.push({
+            pathname: `${url}`
+        }).then(r => [])
+    }
+
+    if ((newUrlTwo.split('?').pop() === 'page') || (newUrlTwo.split('?').pop() === 'filter_min_price')) {
+        let urlArr = url.split('?');
+        urlArr.pop();
+        url = urlArr[0];
     }
 
     return (
@@ -64,12 +81,10 @@ export default function Filter() {
                     />
                     <Link
                         href={`/search/${state.settingName}`} prefetch={false}>
-                        {/*href={`general/products?search=${state.settingName}&filter[price][min]=${state.minPrice}&filter[price][max]=${state.maxPrice}`} prefetch={false}>as={`/search/${state.settingName}`}*/}
-                            <button className={styles.filter__wordButton}
-                                    onClick={() => (dispatch(fetchpostsEight(pagNum, categoryId, state.settingName, state.minPrice, state.maxPrice)))}
-                            >
-                                Поиск
-                            </button>
+                        <a className={styles.filter__wordButton}
+                        >
+                            Поиск
+                        </a>
                     </Link>
                 </div>
                 <div className={styles.filter__containerPrice}>
@@ -80,9 +95,13 @@ export default function Filter() {
                             type="number"
                             id="minPrice"
                             name="minPrice"
-                            value={state.minPrice}
                             onChange={changeInput}
-                            placeholder="От"
+                            placeholder={
+                                props.arrayItems.data.price.min !== 0 ?
+                                    `От ${props.arrayItems.data.price.min}`
+                                    :
+                                    'От'
+                            }
                         />
                     </div>
                     <div className={styles.filter__price}>
@@ -94,32 +113,40 @@ export default function Filter() {
                             type="number"
                             id="maxPrice"
                             name="maxPrice"
-                            value={state.maxPrice}
                             onChange={changeInput}
-                            placeholder="До"
+                            placeholder={
+                                props.arrayItems.data.price.max !== 0 ?
+                                    `До ${props.arrayItems.data.price.max}`
+                                    :
+                                    'До'
+                            }
                         />
                     </div>
                 </div>
-                <Link
-                    href={`general/products?search=${state.settingName}&filter[price][min]=${state.minPrice}&filter[price][max]=${state.maxPrice}`}
-                    prefetch={false}>
-                    <a>
-                        <button
-                            onClick={() => (dispatch(fetchpostsEight(pagNum, categoryId, state.settingName, state.minPrice, state.maxPrice)))}
-                            className={styles.filter__wordButton}>Применить
-                        </button>
-                    </a>
-                </Link>
-                <button
+                <a
+                    className={styles.filter__wordButton}
+                    onClick={() => {
+                        router.push({
+                            pathname: `${url}`,
+                            query: {
+                                filter_min_price: state.minPrice,
+                                filter_max_price: state.maxPrice
+                            }
+                        }).then(r => [])
+                    }}
+                >
+                    Применить
+                </a>
+                <a
                     onClick={clickRemove}
                     className={styles.filter__wordButton}
                 >
                     Очистить
-                </button>
-                <Link href={`/card/27`} prefetch={false}>
+                </a>
+                <Link href={`/card/${state.cardId}`} prefetch={false}>
                     <a className={styles.filter__wordButton}>Корзина</a>
                 </Link>
-                <Link href={`/spisok-pokupok`} prefetch={false}>
+                <Link href={`/spisok-pokupok/${state.token}`} prefetch={false}>
                     <a className={styles.filter__wordButton}>Список покупок</a>
                 </Link>
             </div>

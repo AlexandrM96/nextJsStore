@@ -1,4 +1,3 @@
-import Link from "next/link";
 import {useRouter} from "next/router";
 import styles from '../../../styles/Content.module.css';
 
@@ -10,7 +9,7 @@ export default function PaginationButtons(props) {
 
     const newUrlTwo = router.asPath.split('=').shift();
 
-    if (newUrlTwo.split('?').pop() === 'page') {
+    if ((newUrlTwo.split('?').pop() === 'page') || (newUrlTwo.split('?').pop() === 'filter_min_price')) {
         let urlArr = url.split('?');
         urlArr.pop();
         url = urlArr[0];
@@ -54,41 +53,72 @@ export default function PaginationButtons(props) {
     return (
         <div className={styles.content__pages}>
             <div>
-                <Link href={`/categories/[id]/[...slug]`} as={`${url}`}>
-                    {/*//page=1*/}
-                    <button
-                        className={+urlPagNum >= page.length ? styles.content__pagesButton : styles.content__pagesButton__none}
-                    >
-                        В начало
-                    </button>
-                </Link>
+                <a
+                    className={+urlPagNum >= page.length ? styles.content__pagesButton : styles.content__pagesButton__none}
+                    onClick={() => {
+                        router.query.filter_min_price !== undefined ?
+                            router.push({
+                                pathname: `${url}`,
+                                query: {
+                                    filter_min_price: router.query.filter_min_price,
+                                    filter_max_price: router.query.filter_max_price
+                                }
+                            }).then(r => [])
+                            :
+                            router.push({
+                                pathname: `${url}`
+                            }).then(r => [])
+                    }}
+                >
+                    В начало
+                </a>
             </div>
             {page.map((page, index) =>
-                <button
+                <a
                     key={index}
                     className={+urlPagNum === +page ? styles.content__pagesCount__true : styles.content__pagesCount}
                     onClick={() => {
-                        router.push({
-                            pathname: `${url}`,
-                            query: {page: page}
-                        }).then(r => [])
+                        router.query.filter_min_price !== undefined ?
+                            router.push({
+                                pathname: `${url}`,
+                                query: {
+                                    page: page,
+                                    filter_min_price: router.query.filter_min_price,
+                                    filter_max_price: router.query.filter_max_price
+                                }
+                            }).then(r => [])
+                            :
+                            router.push({
+                                pathname: `${url}`,
+                                query: {page: page}
+                            }).then(r => [])
                     }}
                 >
                     {page}
-                </button>
+                </a>
             )}
             <div>
-                <button
+                <a
                     className={+urlPagNum <= maxPagesPagination.length - 3 ? styles.content__pagesButton : styles.content__pagesButton__none}
                     onClick={() => {
-                        router.push({
-                            pathname: `${router.asPath}`,
-                            query: {page: maxPagesPagination.length}
-                        }).then(r => [])
+                        router.query.filter_min_price !== undefined ?
+                            router.push({
+                                pathname: `${url}`,
+                                query: {
+                                    page: maxPagesPagination.length,
+                                    filter_min_price: router.query.filter_min_price,
+                                    filter_max_price: router.query.filter_max_price
+                                }
+                            }).then(r => [])
+                            :
+                            router.push({
+                                pathname: `${url}`,
+                                query: {page: maxPagesPagination.length}
+                            }).then(r => [])
                     }}
                 >
                     В конец
-                </button>
+                </a>
             </div>
         </div>
     );

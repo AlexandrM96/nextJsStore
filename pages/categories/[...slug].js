@@ -12,7 +12,7 @@ export default function CatalogTwo({
                                    }) {
 
     return (
-        <MainContainer url={urlPage} items={arrayAside.data}>
+        <MainContainer url={urlPage} arrayItems={arrayItems} items={arrayAside.data}>
             {flag ?
                 <Item item={arrayOneItems}/>
                 :
@@ -39,11 +39,55 @@ export async function getServerSideProps({req, params, query}) {
     if (query.page !== undefined && typeof +query.page === 'number') {
         const response = await fetch(`${baseUrl}/categories/${urlArray[urlArray.length - 1]}`);
         const item = await response.json();
+        if (!item.status) {
+            console.log('не прошел проверку на левые значения');
+            return {notFound: true};
+        }
         const productsCategoryId = item.data.id;
         const productsCategoryArray = item.data;
-        const responseTwo = await fetch(`${baseUrl}/products?page=${query.page}&category=${productsCategoryId}`);
+        const responseTwo = (query.filter_min_price && query.filter_min_price) !== undefined ?
+            await fetch(`${baseUrl}/products?page=${query.page}&category=${productsCategoryId}&[price][min]=${query.filter_min_price}&filter[price][max]=${query.filter_max_price}`)
+            :
+            await fetch(`${baseUrl}/products?page=${query.page}&category=${productsCategoryId}`);
         const arrayItems = await responseTwo.json();
+        //запрос для получения товаров из категории внутри категории
+        const str = productsCategoryArray.children_id_list.join('|');
+        const responseFour = await fetch(`${baseUrl}/categories?categories=${str}`);
+        let arrayNavigation = await responseFour.json();
+        if (productsCategoryArray.children_id_list.length === 0) {
+            arrayNavigation = {
+                data: {
+                    categories: []
+                }
+            }
+        }
+        //запрос для боковой панели
+        const baseUrlTwo = `https://bion.biz-mark.ru/api/v1/general`;
+        const responseThree = await fetch(`${baseUrlTwo}/categories`);
+        const arrayAside = await responseThree.json();
+        console.log(arrayItems)
+        return {
+            props: {urlPage, arrayItems, arrayAside, productsCategoryId, productsCategoryArray, arrayNavigation, flag}
+        }
 
+    }
+
+    //работа фильтра
+    if (
+        ((query.filter_min_price && query.filter_min_price) !== undefined)
+        &&
+        ((typeof +query.filter_min_price && typeof +query.filter_min_price) === 'number')
+    ) {
+        const response = await fetch(`${baseUrl}/categories/${urlArray[urlArray.length - 1]}`);
+        const item = await response.json();
+        if (!item.status) {
+            console.log('не прошел проверку на левые значения');
+            return {notFound: true};
+        }
+        const productsCategoryId = item.data.id;
+        const productsCategoryArray = item.data;
+        const responseTwo = await fetch(`${baseUrl}/products?category=${productsCategoryId}&filter[price][min]=${query.filter_min_price}&filter[price][max]=${query.filter_max_price}`);
+        const arrayItems = await responseTwo.json();
         //запрос для получения товаров из категории внутри категории
         const str = productsCategoryArray.children_id_list.join('|');
         const responseFour = await fetch(`${baseUrl}/categories?categories=${str}`);
@@ -62,7 +106,6 @@ export async function getServerSideProps({req, params, query}) {
         return {
             props: {urlPage, arrayItems, arrayAside, productsCategoryId, productsCategoryArray, arrayNavigation, flag}
         }
-
     }
 
     // страница одного товара
@@ -110,7 +153,11 @@ export async function getServerSideProps({req, params, query}) {
                     "count": 1,
                     "max_pages": 1,
                     "per_page": 1
-                }
+                },
+                price: {
+                    min: 199.32,
+                    max: 29539.38
+                },
             }
         }
         return {
