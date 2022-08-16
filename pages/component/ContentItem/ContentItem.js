@@ -14,24 +14,17 @@ export default function ContentItem(props) {
     })
 
     const clickAddToCard = () => {
-
         setState(prev => {
             return {
                 ...prev,
                 flag: true
             }
         })
-
         const cardUserId = localStorage.getItem('cardUserId');
-
         const token = localStorage.getItem('tokenAuth');
-
         const itemId = props.item.id;
-
         const baseUrl = `https://bion.biz-mark.ru/api/v1/general`;
-
         const api = `${baseUrl}/cart?offer_id=${itemId}&quantity=${state.displayNum}`;
-
         fetch(api, {
             method: 'POST',
             headers: {
@@ -92,7 +85,6 @@ export default function ContentItem(props) {
                     }
                 })
         }
-
     };
 
     return (

@@ -122,7 +122,12 @@ export async function getServerSideProps({req, params, query}) {
         }
         //проверка на ветку категорий при условии страницы с одним товаром
         for (let i = 0; i < itemsArray.length - 1; i++) {
+            console.log('зашел вот сюда', itemsArray[i]);
+            console.log('qwqwqwqq2', itemsArray[i]);
             if (itemsArray[i].data.parent_id !== null) {
+                console.log('потом сюда', itemsArray[i]);
+                console.log('qwqwqwqq2', itemsArray[i]);
+                console.log('id', itemsArray[i - 1].data.id, itemsArray[i].data.parent_id)
                 if (itemsArray[i - 1].data.id !== itemsArray[i].data.parent_id) {
                     console.log('не прошел проверку на ветку категорий');
                     return {notFound: true};
@@ -140,8 +145,8 @@ export async function getServerSideProps({req, params, query}) {
         const baseUrlTwo = `https://bion.biz-mark.ru/api/v1/general`;
         const responseThree = await fetch(`${baseUrlTwo}/categories`);
         const arrayAside = await responseThree.json();
-        let productsCategoryId = []
-        let productsCategoryArray = []
+        let productsCategoryId = [];
+        let productsCategoryArray = [];
         let arrayNavigation = {
             data: {
                 categories: []

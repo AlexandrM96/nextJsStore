@@ -40,10 +40,8 @@ export default function Home({baseUrl, array, arrayItems}) {
     }
 
     useEffect(() => {
-        const cardUserId = localStorage.getItem('cardUserId');
         const baseUrl = `https://bion.biz-mark.ru/api/v1/account`;
         const token = localStorage.getItem('tokenAuth');
-        let idCard = '';
 
         fetch(baseUrl, {
             method: 'POST',
@@ -55,8 +53,6 @@ export default function Home({baseUrl, array, arrayItems}) {
         })
             .then((response) => response.json())
             .then((data) => {
-                    idCard = localStorage.getItem('cardUserId');
-                    console.log(idCard)
                     setAuth(prev => {
                         return {
                             ...prev,
@@ -73,7 +69,6 @@ export default function Home({baseUrl, array, arrayItems}) {
                 }
             });
         dispatch(fetchposts());
-        console.log(cardUserId);
     }, []);
 
     return (

@@ -2,23 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="94866967-e93c-4119-a144-7483b0d40e87" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/pages/spisok-pokupok/[id].js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/component/WishListItem/WishListItem.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/account/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/account/login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/account/register.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/account/register.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/card/[id].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/card/[id].js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/categories/[...slug].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/categories/[...slug].js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/categories/[id].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/categories/[id].js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/component/CardItem/CardItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/component/CardItem/CardItem.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/component/Content/Content.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/component/Content/Content.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/component/ContentItem/ContentItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/component/ContentItem/ContentItem.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/component/Filter/Filter.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/component/Filter/Filter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/component/MainContainer/MainContainer.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/component/MainContainer/MainContainer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/component/PaginationButtons/PaginationButtons.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/component/PaginationButtons/PaginationButtons.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/search/[id].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/search/[id].js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/spisok-pokupok.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/Content.module.css" beforeDir="false" afterPath="$PROJECT_DIR$/styles/Content.module.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/spisok-pokupok/[id].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/spisok-pokupok/[id].js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,7 +46,12 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="yarn" />
+    <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -103,6 +98,8 @@
       <workItem from="1660201220525" duration="28716000" />
       <workItem from="1660287536243" duration="24100000" />
       <workItem from="1660502804925" duration="4982000" />
+      <workItem from="1660633116572" duration="14099000" />
+      <workItem from="1660663207343" duration="509000" />
     </task>
     <servers />
   </component>

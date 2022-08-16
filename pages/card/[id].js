@@ -46,14 +46,14 @@ export default function User({userCard, array, baseUrl, arrayItems}) {
 };
 
 export async function getServerSideProps({params}) {
-    let url = params;
+    let cart = params;
     const baseUrl = `https://bion.biz-mark.ru/api/v1/general`;
     const response = await fetch(`${baseUrl}/cart`, {
         method: 'GET',
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
-            'cart': url.id
+            'cart': cart.id
         }
     });
     const userCard = await response.json();
