@@ -121,12 +121,12 @@ export async function getServerSideProps({req, params, query}) {
             itemsArray.push(items);
         }
         //проверка на ветку категорий при условии страницы с одним товаром
-        for (let i = 0; i < itemsArray.length - 1; i++) {
+        for (let i = 0; i < itemsArray.length; i++) {
             console.log('зашел вот сюда', itemsArray[i]);
             console.log('qwqwqwqq2', itemsArray[i]);
             if (itemsArray[i].data.parent_id !== null) {
                 console.log('потом сюда', itemsArray[i]);
-                console.log('qwqwqwqq2', itemsArray[i]);
+                console.log('qwqwqwqq3', itemsArray[i]);
                 console.log('id', itemsArray[i - 1].data.id, itemsArray[i].data.parent_id)
                 if (itemsArray[i - 1].data.id !== itemsArray[i].data.parent_id) {
                     console.log('не прошел проверку на ветку категорий');
